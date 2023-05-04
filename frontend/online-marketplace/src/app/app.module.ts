@@ -6,15 +6,21 @@ import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ItemsService } from '../services/items.service';
+import { LoginComponent } from './components/login/login.component';
+import { MarketComponent } from './components/market/market.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    MarketComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [ItemsService],
   bootstrap: [AppComponent]
