@@ -14,6 +14,6 @@ export class ItemsService {
   }
 
   addData(data: Item) {
-    return this.http.post(this.url, data);
+    return this.http.post(this.url, data) ;
   }
 }

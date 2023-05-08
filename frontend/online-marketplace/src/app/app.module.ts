@@ -14,12 +14,15 @@ import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterComponent } from './components/register/register.component';
+import { UserComponent } from './components/user/user.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     MarketComponent,
-    RegisterComponent
+    RegisterComponent,
+    UserComponent,
   ],
   imports: [
     MatInputModule,

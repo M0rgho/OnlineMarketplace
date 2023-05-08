@@ -1,3 +1,13 @@
 <ul>
     <li *ngFor="let item of items">{{ item.name }} {{ item.imgUrl }} ({{ item.date }})</li>
 </ul>
+
+<form [formGroup] = "itemForm">
+    <label>input name</label>
+    <input name="name" formControlName = "name">
+    <label>input type</label>
+    <input name="type" formControlName = "type">
+    <label>input imgUrl</label>
+    <input name="imgUrl" formControlName = "imgUrl">
+    <button (click)="submit()" type = "submit">submit</button>
+</form>
