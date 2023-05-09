@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const user = require('./User')
 
-
 const transactionSchema = new mongoose.Schema({
     price: {
         type: Number,

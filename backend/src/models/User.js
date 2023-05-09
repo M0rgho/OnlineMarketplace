@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Item = require('./Item');
+
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
         immutable: true,
         minLength: [5, "Your username is to short"]
         },
+    password: String, // todo constraints(length etc.)
     firstname: String,
     lastname: String,
     email: {
@@ -36,14 +37,12 @@ const userSchema = new mongoose.Schema({
         default: 0,
         min: 0,
     },
-    items: {
-        type: [mongoose.ObjectId],
-        ref: 'Item',
-    },
+    items: [],
     transactions: {
         type: [mongoose.ObjectId],
         ref: 'Transaction',
     },
 });
+const userModel = mongoose.model('Users', userSchema);
 
-module.exports = userSchema
+module.exports = userModel

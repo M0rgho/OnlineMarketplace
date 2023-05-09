@@ -1,5 +1,5 @@
 <ul>
-    <li *ngFor="let item of items">{{ item.name }} {{ item.imgUrl }} ({{ item.date }})</li>
+    <li (click)="buy(item._id!)" *ngFor="let item of items">{{ item._id }} {{ item.imgUrl }} ({{ item.date }})</li>
 </ul>
 
 <form [formGroup] = "itemForm">

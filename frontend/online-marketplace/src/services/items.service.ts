@@ -16,4 +16,9 @@ export class ItemsService {
   addData(data: Item) {
     return this.http.post(this.url, data) ;
   }
+  
+  buy( userId: String, itemId:String){
+    console.log("del"+ this.url+"/"+itemId)
+    return this.http.delete(this.url+"/"+itemId);
+  }
 }

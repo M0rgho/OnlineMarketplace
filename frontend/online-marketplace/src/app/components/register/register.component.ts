@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CustomValidators } from '../custom-validator';
+import { AuthService } from 'src/services/auth.service';
+
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
 
@@ -22,16 +25,20 @@ export class RegisterComponent {
 
   constructor(
     // private router: Router,
-    // private authService: AuthService
+    private authService: AuthService
   ) { }
 
   register() {
     if (!this.registerForm.valid) {
       return;
     }
-    // this.authService.register(this.registerForm.value).pipe(
-    //   // If registration was successfull, then navigate to login route
-    //   tap(() => this.router.navigate(['../login']))
-    // ).subscribe();
+    var user = {
+      firstname: this.registerForm.controls["firstname"].value!,
+      lastname: this.registerForm.controls["lastname"].value!,
+      username: this.registerForm.controls["username"].value!,
+      password: this.registerForm.controls["password"].value!,
+      email: this.registerForm.controls["email"].value!
+    }
+    this.authService.register(user).subscribe();
   }
 }

@@ -39,6 +39,10 @@ export class MarketComponent {
   updateData(){
     this.service.getData().subscribe(res=>{
       this.items=res
+      console.log(this.items)
     })
+  }
+  buy(itemId: String ){
+    this.service.buy("asdf",itemId ).subscribe()
   }
 }
