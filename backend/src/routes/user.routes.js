@@ -9,4 +9,6 @@ module.exports = (app) => {
         next();
       });
     app.get("/user/:username",[verifyToken], controller.userAccess);
+
+    app.patch("/user/:username",[verifyToken], controller.addMoney);
 }

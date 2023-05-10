@@ -17,8 +17,19 @@ export class UserService {
         'Authorization': 'Bearer ' + token
       })
     };
-    console.log("user service token " + token)
+    // console.log("user service token " + token)
     return this.http.get<User>(this.url + username, httpOptions)
+  }
+
+  transfer(username: String|null, money: Number){
+    var token = localStorage.getItem('token')
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token
+      })
+    };
+    console.log(money)
+    return this.http.patch(this.url + username, {"balance": money}, httpOptions)
   }
   
 }

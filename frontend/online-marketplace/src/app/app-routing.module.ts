@@ -10,7 +10,8 @@ const routes: Routes = [
   { path: 'market', component: MarketComponent },
   { path: 'register', component: RegisterComponent},
   { path: 'user/:username', component: UserComponent},
-  { path: '', redirectTo: '/login', pathMatch: 'full'}
+  { path: '', redirectTo: '/login', pathMatch: 'full'},
+  { path: '**',redirectTo: '/login'}
 ];
 
 @NgModule({

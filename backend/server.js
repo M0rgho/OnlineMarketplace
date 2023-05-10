@@ -4,18 +4,12 @@ const mongoose = require('mongoose');
 const {URL}  = require('./environment.js');
 const cors = require('cors')
 const bodyParser = require('body-parser');
-const cookieSession = require("cookie-session");
 const app = express();
+
 app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: true })); // nwm co to
 app.use(cors())
-app.use(
-  cookieSession({
-    name: "my-session",
-    secret: "Secret", // should use as secret environment variable
-    httpOnly: true
-  })
-);
+
 const port = 3000;
 
 mongoose.connect(URL, { useNewUrlParser: true, useUnifiedTopology: true })

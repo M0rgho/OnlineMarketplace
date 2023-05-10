@@ -1,3 +1,9 @@
+<form [formGroup] = "formGroup" action="">
+    <label for="balance">add money</label>
+    <input type="number" formControlName="addControl">
+    <button (click)="addMoney()">add</button>
+</form>
+<div>balance {{user.balance}}</div>
 <ul *ngIf="user">
     <li *ngFor="let item of user.items">name {{item.name}} type {{item.type}} </li>
 </ul>

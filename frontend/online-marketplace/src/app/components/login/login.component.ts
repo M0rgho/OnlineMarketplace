@@ -15,9 +15,7 @@ export class LoginComponent {
   });
 
   constructor(
-    private authService: AuthService,private router: Router
-    // private router: Router
-  ) { }
+    private authService: AuthService,private router: Router ) { }
 
   login() {
     if (!this.loginForm.valid) {
