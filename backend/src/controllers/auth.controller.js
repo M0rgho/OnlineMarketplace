@@ -16,52 +16,43 @@ exports.signup = (req, res) => {
     });
 
     user.save().then(() => console.log('Saved user'))
-    .catch((err) => console.error('Failed to save user', err));
+        .catch((err) => console.error('Failed to save user', err));
 }
 
+exports.signin = (req, res) => {
+    userModel.findOne({
+        username: req.body.username,
+    })
+    .exec()
+    .then((user) => {
+        if (!user) {
+            return res.status(404).send({ message: "User Not found." });
+        }
+        var passwordIsValid = bcrypt.compareSync(
+            req.body.password,
+            user.password
+            );
+            
+            if (!passwordIsValid) {
+                console.log("Invalid Password!")
+                return res.status(401).send({ message: "Invalid Password!" });
+            }
 
-// exports.signin = (req, res) => {
-//     userModel.findOne({
-//         username: req.body.username,
-//     }).exec((err, user) => {
-//         if (err) {
-//             res.status(500).send({ message: err });
-//             return;
-//         }
 
-//         if (!user) {
-//             return res.status(404).send({ message: "User Not found." });
-//         }
+        var token = jwt.sign({ id: user._id, username: user.username}, "Secret", {
+            expiresIn: 86400, // 24 hours
+        });
 
-//         var passwordIsValid = bcrypt.compareSync(
-//             req.body.password,
-//             user.password
-//         );
-
-//         if (!passwordIsValid) {
-//             return res.status(401).send({ message: "Invalid Password!" });
-//         }
-
-//         var token = jwt.sign({ id: user.id }, config.secret, {
-//             expiresIn: 86400, // 24 hours
-//         });
-
-//         var authorities = [];
-
-//         for (let i = 0; i < user.roles.length; i++) {
-//             authorities.push("ROLE_" + user.roles[i].name.toUpperCase());
-//         }
-
-//         req.session.token = token;
-
-//         res.status(200).send({
-//             id: user._id,
-//             username: user.username,
-//             email: user.email,
-//             roles: authorities,
-//         });
-//     });
-// };
+        // req.session.token = token;
+        console.log(token)
+        res.status(200).json(token);
+    })
+    .catch((err) => {
+        res.status(500).send({ message: err });
+        return;
+    }
+);
+};
 
 // exports.signout = async (req, res) => {
 //     try {

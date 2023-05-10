@@ -6,15 +6,13 @@
             <form [formGroup]="loginForm" (ngSubmit)="login()">
 
                 <mat-form-field>
-                    <input type="email" matInput placeholder="Email" formControlName="email">
-                    <!-- Here we can display error messages/hints for the user, if one of the Validators adds an error to the email 
+                    <input type="username" matInput placeholder="Username" formControlName="username">
+                    <!-- Here we can display error messages/hints for the user, if one of the Validators adds an error to the username 
              with the .touched check we only display the hints if the input was touched by the users -->
                     <mat-error
-                        *ngIf="this.loginForm.get('email')?.touched && this.loginForm.get('email')?.hasError('required')">
-                        Email is required</mat-error>
-                    <mat-error
-                        *ngIf="this.loginForm.get('email')?.touched && this.loginForm.get('email')?.hasError('email')">
-                        Email must be a valid Email</mat-error>
+                        *ngIf="this.loginForm.get('username')?.touched && this.loginForm.get('username')?.hasError('required')">
+                        Username is required</mat-error>
+
                 </mat-form-field>
 
                 <mat-form-field>

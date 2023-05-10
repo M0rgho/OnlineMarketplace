@@ -16,11 +16,10 @@ export class UserComponent {
   ngOnInit(){
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.username = params.get('username') 
-      this.service.getUser(this.username).subscribe( res =>{
-        this.user = res
-        console.log(this.user)
+      this.service.getUser(this.username).subscribe( user =>{
+          this.user = user
+          console.log(this.user)
       })
      })
   }
-
 }

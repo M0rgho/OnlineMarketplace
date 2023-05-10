@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -8,12 +10,12 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class LoginComponent {
   loginForm: FormGroup = new FormGroup({
-    email: new FormControl(null, [Validators.required, Validators.email]),
+    username: new FormControl(null, [Validators.required]),
     password: new FormControl(null, [Validators.required]),
   });
 
   constructor(
-    // private authService: AuthService,
+    private authService: AuthService,private router: Router
     // private router: Router
   ) { }
 
@@ -21,9 +23,18 @@ export class LoginComponent {
     if (!this.loginForm.valid) {
       return;
     }
-    // this.authService.login(this.loginForm.value).pipe(
-    //   // route to protected/dashboard, if login was successfull
-    //   tap(() => this.router.navigate(['../../protected/dashboard']))
-    // ).subscribe();
+
+    var loginData = {
+      username: this.loginForm.controls["username"].value!,
+      password: this.loginForm.controls["password"].value!,
+    }
+    this.authService.login(loginData).subscribe((res) => {
+      localStorage.setItem('token',res.toString())
+      this.router.navigate(['../user/'+loginData.username])
+    }, (err) => {
+      console.log(err.message);
+    }
+    );
   }
+
 }

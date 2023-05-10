@@ -15,6 +15,7 @@ import {MatCardModule} from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterComponent } from './components/register/register.component';
 import { UserComponent } from './components/user/user.component';
+import { AuthService } from 'src/services/auth.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { UserComponent } from './components/user/user.component';
     FormsModule,
     BrowserAnimationsModule
   ],
-  providers: [ItemsService],
+  providers: [ItemsService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

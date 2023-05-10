@@ -1,5 +1,12 @@
 const controller = require("../controllers/user.controller");
-
+const verifyToken  = require("../middlewares/authJwt");
 module.exports = (app) => {
-    app.get("/user/:username", controller.allAccess);
+    app.use(function(req, res, next) {
+        res.header(
+          "Access-Control-Allow-Headers",
+          "Origin, Content-Type, Accept"
+        );
+        next();
+      });
+    app.get("/user/:username",[verifyToken], controller.userAccess);
 }
