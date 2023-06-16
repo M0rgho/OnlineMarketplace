@@ -1,9 +1,10 @@
 img{
-    width: 200px;
-    height: auto;
+    height: 100px;
+    width: auto;
 }
 
 .outer{
+    height: 10vh;
     padding: 10px;
     display: flex;
     flex-direction: row;
