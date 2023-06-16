@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CustomValidators } from '../custom-validator';
 import { AuthService } from 'src/services/auth.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -25,7 +26,8 @@ export class RegisterComponent {
 
   constructor(
     // private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   register() {
@@ -40,5 +42,6 @@ export class RegisterComponent {
       email: this.registerForm.controls["email"].value!
     }
     this.authService.register(user).subscribe();
+    this.router.navigate(['../login'])
   }
 }

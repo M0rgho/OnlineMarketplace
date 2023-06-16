@@ -6,6 +6,7 @@ exports.allAccess = async (req, res) => {
 
 exports.post = (req, res) => {
     let item = new itemOnSaleModel(req.body);
+    // console.log(item)
     item.save()
         .then(() => console.log('Document saved'))
         .catch((err) => console.error('Failed to save document', err));

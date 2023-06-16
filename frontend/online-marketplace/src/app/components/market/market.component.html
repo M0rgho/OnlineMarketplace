@@ -1,13 +1,43 @@
-<ul>
-    <li (click)="buy(item._id!)" *ngFor="let item of items">{{ item._id }} {{ item.imgUrl }} ({{ item.date }})</li>
-</ul>
-
-<form [formGroup] = "itemForm">
-    <label>input name</label>
-    <input name="name" formControlName = "name">
-    <label>input type</label>
-    <input name="type" formControlName = "type">
-    <label>input imgUrl</label>
-    <input name="imgUrl" formControlName = "imgUrl">
-    <button (click)="submit()" type = "submit">submit</button>
-</form>
+<div>
+    <mat-card>
+        <mat-card-title>Add item</mat-card-title>
+        <mat-card-content>
+            <form [formGroup] = "itemForm" (ngSubmit)="submit()">
+    
+                <mat-form-field>
+                    <input type="name" matInput placeholder="name" formControlName="name">
+                    <!-- Here we can display error messages/hints for the user, if one of the Validators adds an error to the username 
+             with the .touched check we only display the hints if the input was touched by the users -->
+    
+                </mat-form-field>
+    
+                <mat-form-field>
+                    <input type="type" matInput placeholder="type" formControlName="type">
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="imgUrl" matInput placeholder="imgUrl" formControlName="imgUrl">
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="price" matInput placeholder="price" formControlName="price">
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="rarity" matInput placeholder="rarity" formControlName="rarity">
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="collection" matInput placeholder="collection" formControlName="collection">
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="condition" matInput placeholder="condition" formControlName="condition">
+                </mat-form-field>
+                <div class="button">
+                    <!-- Button is disabled(not clickable), if our LoginForm contains Validation Errors -->
+                    <button type="submit" mat-button>Add</button>
+                </div>
+    
+            </form>
+        </mat-card-content>
+    </mat-card>
+    <ul>
+        <li (click)="buy(item._id!)" *ngFor="let item of items">{{ item._id }} {{ item.imgUrl }} ({{ item.date }})</li>
+    </ul>
+</div>

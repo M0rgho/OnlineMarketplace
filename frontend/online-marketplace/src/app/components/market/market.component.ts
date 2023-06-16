@@ -14,7 +14,10 @@ export class MarketComponent {
     name: new FormControl(''),
     type: new FormControl(''),
     imgUrl: new FormControl(''),
-
+    price: new FormControl(''),
+    rarity: new FormControl(''),
+    collection: new FormControl(''),
+    condition: new FormControl('')
   })
   constructor(private service: ItemsService) {}
   ngOnInit() {
@@ -22,20 +25,36 @@ export class MarketComponent {
   }
 
   submit(){
-    let i: Item = {name: this.getName(), date:new Date("2022") ,type: this.getType(), imgUrl:this.getImg()}
+    let form = this.itemForm
+    let i: Item = {
+      name: form.controls["name"].value as String, 
+      date:new Date(),
+      type: form.controls["type"].value as String, 
+      imgUrl: form.controls["imgUrl"].value as String,
+      price: parseInt(form.controls["price"].value!) as Number,
+      rarity: form.controls["rarity"].value as String,
+      fromCollection: form.controls["collection"].value as String,
+      condition: form.controls["condition"].value as String
+    }
     console.log(i)
     this.service.addData(i).subscribe()
     this.updateData()
   }
-  getName(){
-    return this.itemForm.controls["name"].value as String
+
+  // todo
+  filter(){
+
   }
-  getType(){
-    return this.itemForm.controls["type"].value as String
-  }
-  getImg(){
-    return this.itemForm.controls["imgUrl"].value as String
-  }
+ 
+  // getName(){
+  //   return this.itemForm.controls["name"].value as String
+  // }
+  // getType(){
+  //   return this.itemForm.controls["type"].value as String
+  // }
+  // getImg(){
+  //   return this.itemForm.controls["imgUrl"].value as String
+  // }
   updateData(){
     this.service.getData().subscribe(res=>{
       this.items=res

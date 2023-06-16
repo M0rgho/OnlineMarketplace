@@ -4,6 +4,7 @@ const itemSchema = new mongoose.Schema({
     name: String,
     date: { type: Date, default: Date.now },
     type: String,
+    // factory new, ..
     // owner: {
     //     type: [mongoose.ObjectId],
     //     ref: 'User',

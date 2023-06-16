@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 
 verifyToken = (req, res, next) => {
     let bearer = req.get("Authorization");
+    // todo: empty token doesn't work
     const token = bearer.split('Bearer ')[1].trim();
     // console.log("token ", token)
     if (!token) {
