@@ -9,6 +9,7 @@ const itemOnSaleSchema = new mongoose.Schema({
     date: { type: Date, default: Date.now },
     type: String,
     owner: {
+        default: "648c954db7a17894a61341f9",
         type: mongoose.ObjectId,
         ref: 'User',
     },

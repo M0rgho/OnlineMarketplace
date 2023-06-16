@@ -20,6 +20,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { UserComponent } from './components/user/user.component';
 import { AuthService } from 'src/services/auth.service';
 import { LogoutComponent } from './components/logout/logout.component';
+import { AdminHubComponent } from './components/admin-hub/admin-hub.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { LogoutComponent } from './components/logout/logout.component';
     RegisterComponent,
     UserComponent,
     LogoutComponent,
+    AdminHubComponent,
   ],
   imports: [
     MatInputModule,
