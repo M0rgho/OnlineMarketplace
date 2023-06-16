@@ -1,0 +1,19 @@
+img{
+    width: 200px;
+    height: auto;
+}
+
+.outer{
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    /* border-color: black; */
+    border-style: dashed;
+    border-radius: 10px;
+    justify-content: space-between;
+    /* border: 10px; */
+}
+
+.inner{
+    display: flex;
+}

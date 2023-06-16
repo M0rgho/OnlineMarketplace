@@ -1,0 +1,10 @@
+div{
+  margin-left: 2vw;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+app-item{
+  width: 800px;
+}
