@@ -3,5 +3,6 @@ export interface FilterOption{
     rarity: String,
     type: String,
     condition: String,
-    price: Number
+    fromCollection: string,
+    price: number
 };

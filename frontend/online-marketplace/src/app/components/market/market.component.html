@@ -2,7 +2,7 @@
     <div class = "filterOption">
         <mat-form-field>
             <mat-label>Select rarity</mat-label>
-            <mat-select [(value)]="selected">
+            <mat-select [(value)]="option.rarity">
             <mat-option value="none">none</mat-option>
             <mat-option value="common">common</mat-option>
             <mat-option value="uncommon">uncommon</mat-option>
@@ -11,12 +11,11 @@
             <mat-option value="legendary">legendary</mat-option>
             </mat-select>
         </mat-form-field>
-        <p>You selected: {{selected}}</p>
     </div>
     <div class = "filterOption">
         <mat-form-field>
             <mat-label>Select condition</mat-label>
-            <mat-select [(value)]="selected">
+            <mat-select [(value)]="option.condition">
             <mat-option value="none">none</mat-option>
             <mat-option value="battle-scared">battle-scared</mat-option>
             <mat-option value="well-worn">well-worn</mat-option>
@@ -25,29 +24,27 @@
             <mat-option value="factory-new">factory-new</mat-option>
             </mat-select>
         </mat-form-field>
-        <p>You selected: {{selected}}</p>
     </div>
     <div class = "filterOption">
         <mat-form-field>
             <mat-label>Select type</mat-label>
-            <mat-select [(value)]="selected">
+            <mat-select [(value)]="option.type">
             <mat-option value="none">none</mat-option>
             <mat-option value="weapon">weapon</mat-option>
             <mat-option value="gloves">gloves</mat-option>
             </mat-select>
         </mat-form-field>
-        <p>You selected: {{selected}}</p>
     </div>
     <div class = "filterOption">
         <mat-form-field>
             <mat-label>collection</mat-label>
-            <input matInput value="none">
+            <input matInput [(ngModel)]="option.fromCollection">
           </mat-form-field>
     </div>
     <div class = "filterOption">
         <mat-form-field>
             <mat-label>price</mat-label>
-            <input type="number" matInput value="0">
+            <input type="number" matInput [(ngModel)]="option.price">
           </mat-form-field>
     </div>
 </div>

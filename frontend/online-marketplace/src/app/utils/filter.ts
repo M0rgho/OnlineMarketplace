@@ -3,12 +3,25 @@
 import { FilterOption } from "src/interfaces//FilterOption";
 
 export class Filter {
-    option: FilterOption | null = null;
-    constructor(){
+    option: FilterOption;
+    constructor(option: FilterOption){
+        this.option = option
     }
     
     check(item:Item){
-
-        return item.rarity == 'epic'
+        if(!['none',item.condition].includes(this.option.condition)){
+            return false
+        }
+        if(!['none',item.rarity].includes(this.option.rarity)){
+            return false
+        }
+        if(!['none',item.type].includes(this.option.type)){
+            return false
+        }
+        if(this.option.price != 0 && item.price > this.option.price ){
+            return false
+        }
+        // to do collection and name
+        return true
     }
 }
