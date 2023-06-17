@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const user = require('./User')
 
 const transactionSchema = new mongoose.Schema({
     price: {
@@ -24,7 +23,8 @@ const transactionSchema = new mongoose.Schema({
         type: date,
         default: Date.now,
         immutable: true,
-    }
+    },
+    item: Item
 });
 
 module.exports = transactionSchema

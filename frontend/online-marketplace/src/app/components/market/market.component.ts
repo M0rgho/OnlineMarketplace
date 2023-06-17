@@ -12,7 +12,7 @@ import { ItemsService } from 'src/services/items.service';
 export class MarketComponent {
   items: Item[] | null = null;
   selected = 'none'
-  option: FilterOption = {name:'none', rarity:'none', type:'none',condition:'none',fromCollection:'',price:0}
+  option: FilterOption = {name:'', rarity:'none', type:'none',condition:'none',fromCollection:'',price:0}
 
   filter: Filter = new Filter(this.option)
   constructor(private service: ItemsService) {}

@@ -3,13 +3,24 @@ const mongoose = require('mongoose');
 const itemSchema = new mongoose.Schema({
     name: String,
     date: { type: Date, default: Date.now },
-    type: String,
-    // factory new, ..
-    // owner: {
-    //     type: [mongoose.ObjectId],
-    //     ref: 'User',
-    // },
-    imgUrl: String
+    type: {
+        type: String,
+        enum: ['weapon', 'gloves'],
+        immutable: true
+    },
+    imgUrl: String,
+    // new
+    fromCollection: String,
+    rarity: {
+        type: String,
+        enum: ['common', 'uncommon', 'rare', 'epic', 'legendary'],
+        immutable: true
+    },
+    condition: {
+        type: String,
+        enum: ['battle-scarred', 'well-worn','field-tested','minimal-wear','factory-new'],
+        immutable: true
+    }
 });
 
 module.exports = itemSchema
