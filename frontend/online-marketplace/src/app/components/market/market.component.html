@@ -43,7 +43,13 @@
     </div>
     <div class = "filterOption">
         <mat-form-field>
-            <mat-label>price</mat-label>
+            <mat-label>name</mat-label>
+            <input matInput [(ngModel)]="option.name">
+          </mat-form-field>
+    </div>
+    <div class = "filterOption">
+        <mat-form-field>
+            <mat-label>max price</mat-label>
             <input type="number" matInput [(ngModel)]="option.price">
           </mat-form-field>
     </div>

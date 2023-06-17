@@ -23,14 +23,14 @@ export class AdminHubComponent {
   submit(){
     let form = this.itemForm
     let i: Item = {
-      name: form.controls["name"].value as string, 
+      name: form.controls["name"].value!, 
       date:new Date(),
-      type: form.controls["type"].value as string, 
-      imgUrl: form.controls["imgUrl"].value as string,
-      price: parseInt(form.controls["price"].value!) as number,
-      rarity: form.controls["rarity"].value as string,
-      fromCollection: form.controls["collection"].value as string,
-      condition: form.controls["condition"].value as string
+      type: form.controls["type"].value!, 
+      imgUrl: form.controls["imgUrl"].value!,
+      price: parseInt(form.controls["price"].value!),
+      rarity: form.controls["rarity"].value!,
+      fromCollection: form.controls["collection"].value!,
+      condition: form.controls["condition"].value!
     }
     console.log(i)
     this.service.addData(i).subscribe()
