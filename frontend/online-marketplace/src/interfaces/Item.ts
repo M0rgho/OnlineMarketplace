@@ -1,12 +1,12 @@
 export interface Item {
-    _id?:String,
-    name: String,
+    _id?:string,
+    name: string,
     date: Date,
-    type: String,
-    imgUrl: String,
-    price: Number,
-    // new
-    rarity: String,
-    fromCollection: String,
-    condition: String
+    type: string,
+    imgUrl: string,
+    fromCollection: string,
+    rarity: string,
+    condition: string,
+    // price present only if Item is on sale
+    price?: number
 }

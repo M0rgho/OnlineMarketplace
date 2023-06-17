@@ -1,18 +1,18 @@
 const mongoose = require('mongoose');
 
 const itemSchema = new mongoose.Schema({
-    name: string,
+    name: String,
     date: {  type: Date,
          default: Date.now },
-    imgUrl: string,
-    fromCollection: string,
+    imgUrl: String,
+    fromCollection: String,
     rarity: {
-        type: string,
+        type: String,
         enum: ['common', 'uncommon', 'rare', 'epic', 'legendary'],
         immutable: true
     },
     condition: {
-        type: string,
+        type: String,
         enum: ['battle-scarred', 'well-worn','field-tested','minimal-wear','factory-new'],
         immutable: true
     }

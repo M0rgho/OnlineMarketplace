@@ -10,7 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class UserComponent {
   user!: User
-  username!: String | null
+  username!: string | null
   formGroup: FormGroup = new FormGroup({
     addControl: new FormControl(null, [Validators.required])
   })

@@ -1,16 +1,16 @@
 import { Item } from "./Item"
-import { Transaction } from "./Transaction"
+import { MarketTransaction } from "./MarketTransaction"
 
 export interface User{
-    username: String,
-    password: String,
-    firstname: String,
-    lastname: String,
-    email: String,
-    role?: String,
+    username: string,
+    password: string,
+    firstname: string,
+    lastname: string,
+    email: string,
+    role?: string,
     registrationDate?: Date,
     lastLoginDate?: Date,
-    balance?: Number,
+    balance?: number,
     items?: Item[],
-    transactions?: Transaction[],
+    transactions?: MarketTransaction[],
 };

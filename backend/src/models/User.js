@@ -3,17 +3,17 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
     username: {
-        type: string,
+        type: String,
         required: true,
         unique: true,
         immutable: true,
         minLength: [5, "Your username is to short"]
         },
-    password: string, // todo constraints(length etc.)
-    firstname: string,
-    lastname: string,
+    password: String, // todo constraints(length etc.)
+    firstname: String,
+    lastname: String,
     email: {
-        type: string, 
+        type: String, 
         required: 'Email address is required',
         trim: true,
         lowercase: true,
@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
     role: {
-        type: string,
+        type: String,
         default: 'USER',
         enum: ['USER', 'ADMIN'],
         immutable: true
@@ -33,7 +33,7 @@ const userSchema = new mongoose.Schema({
     },
     lastLoginDate: {type: Date},
     balance: {
-        type: number,
+        type: Number,
         default: 0,
         min: 0,
     },

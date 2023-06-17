@@ -10,7 +10,7 @@ export class UserService {
   private url = 'http://localhost:3000/user/';
   constructor(private http: HttpClient, private authService: AuthService) { }
 
-  getUser(username: String | null) {
+  getUser(username: string | null) {
     var token = localStorage.getItem('token')
     const httpOptions = {
       headers: new HttpHeaders({
@@ -21,7 +21,7 @@ export class UserService {
     return this.http.get<User>(this.url + username, httpOptions)
   }
 
-  transfer(username: String|null, money: Number){
+  transfer(username: string|null, money: number){
     var token = localStorage.getItem('token')
     const httpOptions = {
       headers: new HttpHeaders({

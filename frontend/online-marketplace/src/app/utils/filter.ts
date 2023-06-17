@@ -18,7 +18,7 @@ export class Filter {
         if(!['none',item.type].includes(this.option.type)){
             return false
         }
-        if(this.option.price != 0 && item.price > this.option.price ){
+        if(this.option.price != 0 && item.price && item.price > this.option.price ){
             return false
         }
         // to do collection and name

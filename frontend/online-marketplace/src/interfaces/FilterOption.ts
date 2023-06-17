@@ -1,8 +1,8 @@
 export interface FilterOption{
-    name: String,
-    rarity: String,
-    type: String,
-    condition: String,
+    name: string,
+    rarity: string,
+    type: string,
+    condition: string,
     fromCollection: string,
     price: number
 };

@@ -30,7 +30,7 @@ export class MarketComponent {
       console.log(this.items)
     })
   }
-  buy(itemId: String ){
+  buy(itemId: string ){
     this.service.buy("asdf",itemId ).subscribe()
   }
 }
