@@ -1,11 +1,11 @@
-const itemOnSaleModel = require("../models/ItemOnSale")
+const marketTransactionModel = require("../models/marketTransaction")
 exports.allAccess = async (req, res) => {
-    const Items = await itemOnSaleModel.find({}).lean();
+    const Items = await marketTransactionModel.find({}).lean();
     res.send(Items);
 }
 
 exports.post = (req, res) => {
-    let item = new itemOnSaleModel(req.body);
+    let item = new marketTransactionModel(req.body);
     // console.log(item)
     item.save()
         .then(() => console.log('Document saved'))

@@ -3,17 +3,17 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
     username: {
-        type: String,
+        type: string,
         required: true,
         unique: true,
         immutable: true,
         minLength: [5, "Your username is to short"]
         },
-    password: String, // todo constraints(length etc.)
-    firstname: String,
-    lastname: String,
+    password: string, // todo constraints(length etc.)
+    firstname: string,
+    lastname: string,
     email: {
-        type: String, 
+        type: string, 
         required: 'Email address is required',
         trim: true,
         lowercase: true,
@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
     role: {
-        type: String,
+        type: string,
         default: 'USER',
         enum: ['USER', 'ADMIN'],
         immutable: true
@@ -33,16 +33,16 @@ const userSchema = new mongoose.Schema({
     },
     lastLoginDate: {type: Date},
     balance: {
-        type: Number,
+        type: number,
         default: 0,
         min: 0,
     },
     items: [],
     transactions: {
         type: [mongoose.ObjectId],
-        ref: 'Transaction',
+        ref: 'MarketTransaction',
     },
 });
-const userModel = mongoose.model('Users', userSchema);
+const userModel = mongoose.model('User', userSchema);
 
 module.exports = userModel
