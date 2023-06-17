@@ -14,6 +14,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterComponent } from './components/register/register.component';
@@ -38,6 +40,8 @@ import { ItemComponent } from './components/item/item.component';
     MatInputModule,
     MatToolbarModule,
     MatIconModule,
+    MatSelectModule,
+    MatFormFieldModule,
     ReactiveFormsModule,
     MatCardModule,
     BrowserModule,

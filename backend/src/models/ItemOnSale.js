@@ -7,7 +7,11 @@ const itemOnSaleSchema = new mongoose.Schema({
     // }
     name: String,
     date: { type: Date, default: Date.now },
-    type: String,
+    type: {
+        type: String,
+        enum: ['weapon', 'gloves'],
+        immutable: true
+    },
     owner: {
         default: "648c954db7a17894a61341f9",
         type: mongoose.ObjectId,

@@ -4,7 +4,14 @@ div{
   flex-direction: column;
   gap: 10px;
 }
-
+.filterOption{
+  width: 10vw;
+  display: flex;
+}
+.filterContainer{
+  display: flex;
+  flex-direction: row;
+}
 app-item{
   width: 800px;
 }
