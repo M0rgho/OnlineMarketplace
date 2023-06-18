@@ -16,6 +16,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button'
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterComponent } from './components/register/register.component';
@@ -24,6 +25,7 @@ import { AuthService } from 'src/services/auth.service';
 import { LogoutComponent } from './components/logout/logout.component';
 import { AdminHubComponent } from './components/admin-hub/admin-hub.component';
 import { ItemComponent } from './components/item/item.component';
+import { FilterFormComponent } from './components/filter-form/filter-form.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ import { ItemComponent } from './components/item/item.component';
     LogoutComponent,
     AdminHubComponent,
     ItemComponent,
+    FilterFormComponent,
   ],
   imports: [
     MatInputModule,
@@ -42,6 +45,7 @@ import { ItemComponent } from './components/item/item.component';
     MatIconModule,
     MatSelectModule,
     MatFormFieldModule,
+    MatButtonModule,
     ReactiveFormsModule,
     MatCardModule,
     BrowserModule,

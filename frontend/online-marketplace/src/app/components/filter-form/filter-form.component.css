@@ -1,0 +1,14 @@
+div{
+    margin-left: 2vw;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+.filterOption{
+width: 7vw;
+display: flex;
+}
+.filterContainer{
+display: flex;
+flex-direction: row;
+}

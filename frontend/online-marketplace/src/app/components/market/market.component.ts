@@ -31,6 +31,6 @@ export class MarketComponent {
     })
   }
   buy(itemId: string ){
-    this.service.buy("asdf",itemId ).subscribe()
+    // this.service.buy("asdf",itemId ).subscribe()
   }
 }

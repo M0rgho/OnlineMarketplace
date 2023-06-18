@@ -3,6 +3,9 @@ import { User } from 'src/interfaces/User';
 import { UserService } from 'src/services/user.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Item } from 'src/interfaces/Item';
+import { FilterOption } from 'src/interfaces/FilterOption';
+import { Filter } from 'src/app/utils/filter';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -11,6 +14,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class UserComponent {
   user!: User
   username!: string | null
+  option: FilterOption = {name:'', rarity:'none', type:'none',condition:'none',fromCollection:'',price:0}
+  filter: Filter = new Filter(this.option)
+
   formGroup: FormGroup = new FormGroup({
     addControl: new FormControl(null, [Validators.required])
   })
@@ -20,9 +26,11 @@ export class UserComponent {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.username = params.get('username') 
       this.getData()
-     })
+     })     
   }
-
+  check(item: Item){
+    return this.filter.check(item)
+  }
   addMoney(){
     var money = this.formGroup.get('addControl')?.value
     this.service.transfer(this.username,this.user.balance+money)
@@ -35,5 +43,11 @@ export class UserComponent {
   }, (err) => {
     this.router.navigate(["/login"])
   })
+  }
+
+  getImg(item: Item){
+    var imgSrc: string = "../../../assets/photos/"
+    imgSrc += item.imgUrl
+    return imgSrc
   }
 }

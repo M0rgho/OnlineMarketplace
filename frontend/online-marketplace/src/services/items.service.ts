@@ -19,7 +19,7 @@ export class ItemsService {
   }
   
   buy( userId: string, itemId:string){
-    console.log("del"+ this.url+"/"+itemId)
-    return this.http.delete(this.url+"/"+itemId);
+    // console.log("del"+ this.url+"/"+itemId)
+    // return this.http.delete(this.url+"/"+itemId);
   }
 }

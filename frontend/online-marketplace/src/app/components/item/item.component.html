@@ -4,5 +4,5 @@
         <p>{{item.name}}</p>
         <p>{{item.condition}}</p>    
     </div>
-    <p>{{item.price}}</p>
+    <p *ngIf="item.price">{{item.price}}</p>
 </div>

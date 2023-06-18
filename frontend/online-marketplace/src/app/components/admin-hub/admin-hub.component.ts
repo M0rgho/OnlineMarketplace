@@ -9,30 +9,14 @@ import { ItemsService } from 'src/services/items.service';
   styleUrls: ['./admin-hub.component.css']
 })
 export class AdminHubComponent {
-  itemForm = new FormGroup({
-    name: new FormControl(''),
-    type: new FormControl(''),
-    imgUrl: new FormControl(''),
-    price: new FormControl(''),
-    rarity: new FormControl(''),
-    collection: new FormControl(''),
-    condition: new FormControl('')
-  })
+  item: Item = {name:'', rarity:'none', type:'none',condition:'none',fromCollection:'',date: new Date(),price:0, imgUrl:'',}
+
+
   constructor(private service: ItemsService) {}
 
   submit(){
-    let form = this.itemForm
-    let i: Item = {
-      name: form.controls["name"].value!, 
-      date:new Date(),
-      type: form.controls["type"].value!, 
-      imgUrl: form.controls["imgUrl"].value!,
-      price: parseInt(form.controls["price"].value!),
-      rarity: form.controls["rarity"].value!,
-      fromCollection: form.controls["collection"].value!,
-      condition: form.controls["condition"].value!
-    }
-    console.log(i)
-    this.service.addData(i).subscribe()
+
+    console.log(this.item)
+    this.service.addData(this.item).subscribe()
   }
 }
