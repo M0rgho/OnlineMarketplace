@@ -26,6 +26,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { AdminHubComponent } from './components/admin-hub/admin-hub.component';
 import { ItemComponent } from './components/item/item.component';
 import { FilterFormComponent } from './components/filter-form/filter-form.component';
+import { ItemDetailsComponent } from './item-details/item-details.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { FilterFormComponent } from './components/filter-form/filter-form.compon
     AdminHubComponent,
     ItemComponent,
     FilterFormComponent,
+    ItemDetailsComponent,
   ],
   imports: [
     MatInputModule,
