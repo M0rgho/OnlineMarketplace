@@ -11,7 +11,7 @@ import { MarketService } from 'src/services/market.service';
   styleUrls: ['./market.component.css'],
 })
 export class MarketComponent {
-  items: MarketTransaction[] | null = null;
+  transactions: MarketTransaction[] | null = null;
   selected = 'none'
   option: FilterOption = {name:'', rarity:'none', type:'none',condition:'none',fromCollection:'',price:0}
 
@@ -21,14 +21,14 @@ export class MarketComponent {
     this.updateData()
   }
 
-  check(item: MarketTransaction){
+  check(item: Item){
     return this.filter.check(item)
   }
 
   updateData(){
     this.service.getData().subscribe(res=>{
-      this.items=res
-      console.log(this.items)
+      this.transactions=res
+      console.log(this.transactions)
     })
   }
   buy(item: MarketTransaction){

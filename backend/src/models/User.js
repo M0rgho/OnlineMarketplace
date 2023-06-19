@@ -39,7 +39,7 @@ const userSchema = new mongoose.Schema({
         min: 0,
     },
     items: {
-        type: [mongoose.ObjectId],
+        type: [itemSchema],
         ref: 'Item'
     },
     transactions: {

@@ -3,9 +3,9 @@
 </app-filter-form>
 
 <div>
-    <div *ngFor="let item of items">
-        <app-item *ngIf="check(item)" [item]="item">
+    <div *ngFor="let transaction of transactions">
+        <app-item *ngIf="check(transaction.item)" [item]="transaction.item">
         </app-item>    
-        <button *ngIf="check(item)" (click)="buy(item)" mat-raised-button color="primary">buy(nic nie robi jeszcze)</button>
+        <button *ngIf="check(transaction.item)" (click)="buy(transaction)" mat-raised-button color="primary">buy(nic nie robi jeszcze)</button>
     </div>
 </div>

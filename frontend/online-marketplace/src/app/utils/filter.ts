@@ -9,7 +9,7 @@ export class Filter {
         this.option = option
     }
     
-    check(item:Item | MarketTransaction){
+    check(item:Item ){
         if(!['none',item.condition].includes(this.option.condition)){
             return false
         }

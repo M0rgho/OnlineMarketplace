@@ -14,5 +14,5 @@ module.exports = (app) => {
     //     console.log("delete " + req.params.id)
     // })
 
-    app.post("/items", controller.post)
+    app.post("/items", controller.createItem)
 }  
