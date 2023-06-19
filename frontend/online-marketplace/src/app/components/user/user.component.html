@@ -13,5 +13,6 @@
     <div *ngFor="let item of user.items">
         <app-item *ngIf="check(item)" [item]="item">
         </app-item>    
+        <button (click)="sell(item)" mat-raised-button color="primary">sell(nic nie robi jeszcze)</button>
     </div>
 </div>

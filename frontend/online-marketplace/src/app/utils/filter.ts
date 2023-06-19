@@ -1,6 +1,7 @@
 
  import { Item } from "src/interfaces/Item";
 import { FilterOption } from "src/interfaces//FilterOption";
+import { MarketTransaction } from "src/interfaces/MarketTransaction";
 
 export class Filter {
     option: FilterOption;
@@ -8,7 +9,7 @@ export class Filter {
         this.option = option
     }
     
-    check(item:Item){
+    check(item:Item | MarketTransaction){
         if(!['none',item.condition].includes(this.option.condition)){
             return false
         }

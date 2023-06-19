@@ -1,8 +1,9 @@
 import { User } from "./User";
 
 export interface MarketTransaction {
+    _id: string,
     // item data
-    _id?: string,
+    item_id: string,
     name: string,
     date: Date,
     type: string,

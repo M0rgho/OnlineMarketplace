@@ -9,7 +9,9 @@ module.exports = (app) => {
         next();
       });
 
-    app.post("/sell", [verifyToken], controller.sell)
+    // app.post("/sell", [verifyToken], controller.sell)
+    app.post("/sell", controller.sell)
+
 
     app.get("/market_offers", controller.active_offers)
 }

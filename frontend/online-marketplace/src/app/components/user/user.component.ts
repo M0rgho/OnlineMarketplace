@@ -6,6 +6,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Item } from 'src/interfaces/Item';
 import { FilterOption } from 'src/interfaces/FilterOption';
 import { Filter } from 'src/app/utils/filter';
+import { MarketService } from 'src/services/market.service';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -13,18 +14,22 @@ import { Filter } from 'src/app/utils/filter';
 })
 export class UserComponent {
   user!: User
-  username!: string | null
+  username!: string 
   option: FilterOption = {name:'', rarity:'none', type:'none',condition:'none',fromCollection:'',price:0}
   filter: Filter = new Filter(this.option)
 
   formGroup: FormGroup = new FormGroup({
     addControl: new FormControl(null, [Validators.required])
   })
-  constructor(private route: ActivatedRoute, private service: UserService,private router: Router){
-  }
+  constructor(
+    private route: ActivatedRoute, 
+    private service: UserService,
+    private router: Router, 
+    private marketService: MarketService){}
+
   ngOnInit(){
     this.route.paramMap.subscribe((params: ParamMap) => {
-      this.username = params.get('username') 
+      this.username = params.get('username')! 
       this.getData()
      })     
   }
@@ -49,5 +54,10 @@ export class UserComponent {
     var imgSrc: string = "../../../assets/photos/"
     imgSrc += item.imgUrl
     return imgSrc
+  }
+
+  sell(item: Item){
+    var price = 69
+    this.marketService.sell(item,price,this.user).subscribe()
   }
 }

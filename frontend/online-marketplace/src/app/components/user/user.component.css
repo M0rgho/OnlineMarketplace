@@ -1,5 +1,5 @@
  
-app-item{
+app-item, button{
     width: 800px;
   }
 .container{
@@ -7,5 +7,6 @@ app-item{
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 800px;
   }
   

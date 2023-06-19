@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { Filter } from 'src/app/utils/filter';
 import { FilterOption } from 'src/interfaces/FilterOption';
 import { Item } from 'src/interfaces/Item';
-import { ItemsService } from 'src/services/items.service';
+import { MarketTransaction } from 'src/interfaces/MarketTransaction';
+import { MarketService } from 'src/services/market.service';
 
 @Component({
   selector: 'app-market',
@@ -10,17 +11,17 @@ import { ItemsService } from 'src/services/items.service';
   styleUrls: ['./market.component.css'],
 })
 export class MarketComponent {
-  items: Item[] | null = null;
+  items: MarketTransaction[] | null = null;
   selected = 'none'
   option: FilterOption = {name:'', rarity:'none', type:'none',condition:'none',fromCollection:'',price:0}
 
   filter: Filter = new Filter(this.option)
-  constructor(private service: ItemsService) {}
+  constructor(private service: MarketService) {}
   ngOnInit() {
     this.updateData()
   }
 
-  check(item: Item){
+  check(item: MarketTransaction){
     return this.filter.check(item)
   }
 
@@ -30,7 +31,7 @@ export class MarketComponent {
       console.log(this.items)
     })
   }
-  buy(itemId: string ){
-    // this.service.buy("asdf",itemId ).subscribe()
+  buy(item: MarketTransaction){
+    console.log(item)
   }
 }

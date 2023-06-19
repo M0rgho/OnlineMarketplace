@@ -19,6 +19,7 @@ mongoose.connect(URL, { useNewUrlParser: true, useUnifiedTopology: true })
 require("./src/routes/items.routes.js")(app)
 require("./src/routes/user.routes.js")(app)
 require("./src/routes/auth.routes.js")(app)
+require("./src/routes/market.routes.js")(app)
 
 
 app.listen(port, function () {

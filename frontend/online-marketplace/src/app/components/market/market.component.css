@@ -5,6 +5,6 @@ div{
   gap: 10px;
 }
 
-app-item{
+app-item, button{
   width: 800px;
 }

@@ -1,4 +1,4 @@
-const item = require("../models/Item")
+const item = require("../models/Item").itemModel
 exports.allAccess = async (req, res) => {
     const Items = await item.find({}).lean();
     res.send(Items);

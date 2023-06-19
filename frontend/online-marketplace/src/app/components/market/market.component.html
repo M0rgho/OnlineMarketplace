@@ -6,5 +6,6 @@
     <div *ngFor="let item of items">
         <app-item *ngIf="check(item)" [item]="item">
         </app-item>    
+        <button *ngIf="check(item)" (click)="buy(item)" mat-raised-button color="primary">buy(nic nie robi jeszcze)</button>
     </div>
 </div>
