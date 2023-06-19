@@ -11,8 +11,14 @@
     </form>
     <div>balance {{user.balance}}</div>
     <div *ngFor="let item of user.items">
-        <app-item *ngIf="check(item)" [item]="item">
-        </app-item>    
-        <button (click)="sell(item)" mat-raised-button color="primary">sell(nic nie robi jeszcze)</button>
+        <app-item *ngIf="check(item)" [item]="item" [itemOnSale]="false">
+        </app-item> 
+        <div class="sellButton">
+            <mat-form-field>
+                <mat-label>fill price to sell</mat-label>
+                <input type="number" matInput [(ngModel)]="item.price">
+            </mat-form-field>
+            <button style="width: 50px; height: 48px;" *ngIf="item.price" (click)="sell(item)" mat-raised-button color="primary">sell</button>
+        </div>   
     </div>
 </div>

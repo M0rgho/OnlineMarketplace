@@ -8,11 +8,15 @@ import { Item } from 'src/interfaces/Item';
 })
 export class ItemComponent {
   @Input() item!: Item;
+  @Input() itemOnSale!: boolean;
+  @Input() price?: number;
+
   borderColor: string = "black"
   imgSrc: string = "../../../assets/photos/"
   ngOnInit(){
     this.getColor()
     this.imgSrc = this.imgSrc+this.item.imgUrl
+    console.log(this.item)
   }
 
   getColor(){

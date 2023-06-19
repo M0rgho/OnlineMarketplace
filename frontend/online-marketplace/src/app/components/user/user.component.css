@@ -9,4 +9,9 @@ app-item, button{
     gap: 10px;
     width: 800px;
   }
+
+.sellButton{
+  display: flex;
+  height: 70px;
+}
   

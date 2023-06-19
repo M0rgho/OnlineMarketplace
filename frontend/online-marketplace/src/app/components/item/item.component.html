@@ -4,7 +4,7 @@
         <p>{{item.name}}</p>
         <p>{{item.condition}}</p>
     </div>
-    <p *ngIf="item.price">{{item.price}}</p>
+    <p *ngIf="itemOnSale">{{price}}</p>
     <a [routerLink]="['/item-details', item._id]"> item history </a>
 
 </div>

@@ -19,7 +19,7 @@ exports.allAccess = async (req, res) => {
 
 exports.createItem = async (req, res) => {
     // console.log(req.body)
-    const itemToSave = new item(req.body)
+    const itemToSave = new Item(req.body)
     // itemToSave.save()
     // console.log(itemToSave.name)
     await User.findOneAndUpdate(
@@ -28,11 +28,11 @@ exports.createItem = async (req, res) => {
 }    
  
      
-exports.post = (req, res) => {
-    let itemToSave = new Item(req.body);
-    // console.log(item)
-    itemToSave.save()
-        .then(() => console.log('Document saved'))
-        .catch((err) => console.error('Failed to save document', err));
-    // res.sendStatus(200);
-}
+// exports.post = (req, res) => {
+//     let itemToSave = new Item(req.body);
+//     // console.log(item)
+//     itemToSave.save()
+//         .then(() => console.log('Document saved'))
+//         .catch((err) => console.error('Failed to save document', err));
+//     // res.sendStatus(200);
+// }

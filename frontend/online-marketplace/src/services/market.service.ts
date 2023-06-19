@@ -16,10 +16,10 @@ export class MarketService {
     return this.http.get<MarketTransaction[]>(url);
   }
 
-  sell(item: Item, price: number, user: User){
+  sell(item: Item, user: User){
     const url = 'http://localhost:3000/sell';
     const transaction = {    postedDate: Date,
-      price: price,
+      price: item.price,
       status: 'Active',
       seller: user,
       item: item

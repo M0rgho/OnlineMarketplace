@@ -58,6 +58,6 @@ export class UserComponent {
 
   sell(item: Item){
     var price = 69
-    this.marketService.sell(item,price,this.user).subscribe()
+    this.marketService.sell(item,this.user).subscribe()
   }
 }
