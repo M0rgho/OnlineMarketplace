@@ -1,7 +1,13 @@
 const mongoose = require('mongoose');
-const ItemModel = require("./Item");
+const itemSchema = require('./Item').itemSchema;
 
-const marketTransaction = new mongoose.Schema({
+
+
+const marketTransactionSchema = new mongoose.Schema({
+    item: {
+        type: mongoose.ObjectId,
+        ref: 'Item'
+    },
     postedDate: { type: Date, default: Date.now },
     price: { type: Number, required: true},
     status: { 
@@ -15,14 +21,16 @@ const marketTransaction = new mongoose.Schema({
         type: mongoose.ObjectId,
         ref: 'User',
         required: true,
+        index: true
     },
     sellDate: { type: Date },
     buyer: {
         type: mongoose.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        index: true
     }
 });
 
-const marketTransactionModel = ItemModel.discriminator('MarketTransaction', marketTransaction); 
+const marketTransactionModel = mongoose.model('MarketTransaction', marketTransactionSchema); 
 
 module.exports = marketTransactionModel

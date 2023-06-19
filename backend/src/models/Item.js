@@ -9,7 +9,6 @@ const itemSchema = new mongoose.Schema({
         immutable: true
     },
     imgUrl: String,
-    // new
     fromCollection: String,
     rarity: {
         type: String,
@@ -25,4 +24,4 @@ const itemSchema = new mongoose.Schema({
 
 const itemModel = mongoose.model('Item', itemSchema);
 
-module.exports = itemModel;
+module.exports = {itemSchema, itemModel};

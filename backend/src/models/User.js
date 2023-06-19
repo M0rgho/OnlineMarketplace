@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const itemSchema = require('./Item').itemSchema;
+
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -36,7 +38,10 @@ const userSchema = new mongoose.Schema({
         default: 0,
         min: 0,
     },
-    items: [],
+    items: {
+        type: [mongoose.ObjectId],
+        ref: 'Item'
+    },
     transactions: {
         type: [mongoose.ObjectId],
         ref: 'MarketTransaction',
