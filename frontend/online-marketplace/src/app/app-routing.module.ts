@@ -5,6 +5,7 @@ import { UserComponent } from './components/user/user.component';
 import { MarketComponent } from './components/market/market.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AdminHubComponent } from './components/admin-hub/admin-hub.component';
+import { ItemDetailsComponent } from './item-details/item-details.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -12,8 +13,9 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'user/:username', component: UserComponent},
   { path: 'admin', component: AdminHubComponent},
+  { path: 'item-details/:_id', component: ItemDetailsComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full'},
-  { path: '**',redirectTo: '/login'}
+  { path: '**', redirectTo: '/login'}
 ];
 
 @NgModule({

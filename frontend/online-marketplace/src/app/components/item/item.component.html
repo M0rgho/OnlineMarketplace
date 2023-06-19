@@ -2,7 +2,9 @@
     <img src={{imgSrc}} alt="item photo">
     <div class="inner">
         <p>{{item.name}}</p>
-        <p>{{item.condition}}</p>    
+        <p>{{item.condition}}</p>
     </div>
     <p *ngIf="item.price">{{item.price}}</p>
+    <a [routerLink]="['/item-details', item._id]"> item history </a>
+
 </div>
