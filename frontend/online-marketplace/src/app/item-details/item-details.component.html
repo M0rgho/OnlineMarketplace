@@ -1,0 +1,13 @@
+<div class="item-details">
+    <p> item_id: {{ item_id }} </p>
+    <app-item *ngIf="item$ | async as item" [item]="item">
+        {{ item }}
+    </app-item>  
+    <hr>
+    <div class="trasaction-history">
+        <h3> Historia transakcji: </h3>  
+        <ul>
+            <li *ngFor="let transaction of transactions">{{ transaction }}</li>
+        </ul>
+    </div>
+</div>
