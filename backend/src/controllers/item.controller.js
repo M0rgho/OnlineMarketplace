@@ -20,7 +20,7 @@ exports.allAccess = async (req, res) => {
 exports.createItem = async (req, res) => {
     // console.log(req.body)
     const itemToSave = new Item(req.body)
-    // itemToSave.save()
+    itemToSave.save()
     // console.log(itemToSave.name)
     await User.findOneAndUpdate(
         { username: "admin" },
