@@ -38,4 +38,9 @@ export class MarketService {
     console.log(offer)
     return this.http.post<MarketTransaction[]>(url, offer);
   }
+  cancell(item: MarketTransaction){
+    const url = 'http://localhost:3000/cancell';
+
+    return this.http.post<MarketTransaction[]>(url, item);
+  }
 }

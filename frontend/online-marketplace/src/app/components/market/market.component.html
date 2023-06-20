@@ -6,6 +6,7 @@
     <div *ngFor="let transaction of transactions">
         <app-item *ngIf="check(transaction.item)" [item]="transaction.item" [itemOnSale]="true" [price]="transaction.price">
         </app-item>    
-        <button *ngIf="check(transaction.item) && checkToken()" (click)="buy(transaction)" mat-raised-button color="primary">buy(nic nie robi jeszcze)</button>
+        <button *ngIf="check(transaction.item) && checkToken(transaction)" (click)="buy(transaction)" mat-raised-button color="primary">buy </button>
+        <button *ngIf="check(transaction.item) && !checkToken(transaction)" (click)="cancell(transaction)" mat-raised-button color="primary">cancell offer</button>
     </div>
 </div>

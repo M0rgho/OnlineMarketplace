@@ -53,7 +53,7 @@ exports.active_offers = async (req, res) => {
 
 exports.buy = async (req, res) => {
   const transaction = req.body.transaction;
-  
+  console.log(req.body)
   const session = await mongoose.startSession()
   try {
     session.startTransaction();
@@ -86,5 +86,32 @@ exports.buy = async (req, res) => {
     await session.abortTransaction();
     console.error('Failed to buy', error);
     return res.status(500).send({ message: "Failed to buy" });
+  }
+}
+
+exports.cancell = async (req, res) => {
+  
+  const session = await mongoose.startSession()
+  try {
+    session.startTransaction();
+
+    const transaction = await MarketTransaction.findOne({ _id: req.body._id});
+    const seller = await User.findOne({_id: transaction.seller});
+
+    transaction.status = 'Cancelled';
+    transaction.sellDate = Date.now();
+
+    seller.items.push(transaction.item)
+
+    await transaction.save()
+    await seller.save()
+
+    await session.commitTransaction();
+    session.endSession();
+
+  } catch (error) {
+    await session.abortTransaction();
+    console.error('Failed to cancell', error);
+    return res.status(500).send({ message: "Failed to cancell" });
   }
 }

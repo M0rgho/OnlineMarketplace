@@ -24,8 +24,9 @@ export class MarketComponent {
   check(item: Item){
     return this.filter.check(item)
   }
-  checkToken(){
-    return localStorage.getItem("user") != "none"
+  checkToken(transaction: MarketTransaction){
+    // console.log(transaction.seller)
+    return localStorage.getItem('id') != null && localStorage.getItem('id') != transaction.seller
   }
 
   updateData(){
@@ -36,5 +37,8 @@ export class MarketComponent {
   }
   buy(item: MarketTransaction){
     this.service.buy(item, localStorage.getItem("user")!).subscribe()
+  }
+  cancell(item: MarketTransaction){
+    this.service.cancell(item).subscribe()
   }
 }

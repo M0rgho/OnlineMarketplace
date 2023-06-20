@@ -10,7 +10,7 @@ export interface MarketTransaction {
     postedDate: Date,
     price: number
     status: string,
-    seller: User,
+    seller: string,
     sellDate?: Date,
     buyer?: User
 };

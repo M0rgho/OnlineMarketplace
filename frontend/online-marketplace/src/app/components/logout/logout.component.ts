@@ -11,8 +11,9 @@ export class LogoutComponent {
 
   }
     logout(){
-      localStorage.setItem('token','')
-      localStorage.setItem('user','none')
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
+      localStorage.removeItem('id')
       this.router.navigate(['../login'])
     }
 }

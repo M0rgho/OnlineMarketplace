@@ -45,7 +45,7 @@ exports.signin = (req, res) => {
 
         // req.session.token = token;
         // console.log(token)
-        res.status(200).json(token);
+        res.status(200).send( {token: token, id:user._id} );
     })
     .catch((err) => {
         res.status(500).send({ message: err });

@@ -7,7 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   constructor() {
-    // localStorage.setItem('user',"none")
   }
   title = 'online-marketplace';
 }

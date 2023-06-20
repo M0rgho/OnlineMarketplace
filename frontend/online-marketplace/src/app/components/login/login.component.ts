@@ -26,9 +26,13 @@ export class LoginComponent {
       username: this.loginForm.controls["username"].value!,
       password: this.loginForm.controls["password"].value!,
     }
-    this.authService.login(loginData).subscribe((res) => {
-      localStorage.setItem('token',res.toString())
+    this.authService.login(loginData).subscribe((res:any) => {
+      
+      localStorage.setItem('token',res.token)
       localStorage.setItem('user',loginData.username)
+      
+      localStorage.setItem('id',res.id)
+       
       this.router.navigate(['../user/'+loginData.username])
     }, (err) => {
       console.log(err.message);
