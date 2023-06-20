@@ -1,0 +1,14 @@
+<h2 mat-dialog-title> Confirmation</h2>
+<mat-dialog-content class="dialog">
+  <p *ngIf="!data.loggedIn">You must be logged in to perform this action.</p>
+  <p *ngIf="data.loggedIn"> {{ data.text }} </p>
+  <mat-form-field *ngIf="data.loggedIn && data.sell">
+    <mat-label>Price:</mat-label>
+    <input matInput placeholder="Enter price" [(ngModel)]="price" type="number">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions class="dialog-actions">
+  <button mat-button *ngIf="!data.loggedIn" (click)="onLoginClick()">Login</button>
+  <button mat-button *ngIf="data.loggedIn" (click)="onCancelClick()">Cancel</button>
+  <button mat-button *ngIf="data.loggedIn" color="primary" style="background-color: green; color: white;" (click)="onConfirmClick()">Confirm</button>
+</mat-dialog-actions>

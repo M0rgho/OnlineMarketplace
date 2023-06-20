@@ -89,7 +89,7 @@ exports.buy = async (req, res) => {
   }
 }
 
-exports.cancell = async (req, res) => {
+exports.cancel = async (req, res) => {
   
   const session = await mongoose.startSession()
   try {
@@ -98,7 +98,7 @@ exports.cancell = async (req, res) => {
     const transaction = await MarketTransaction.findOne({ _id: req.body._id});
     const seller = await User.findOne({_id: transaction.seller});
 
-    transaction.status = 'Cancelled';
+    transaction.status = 'cancelled';
     transaction.sellDate = Date.now();
 
     seller.items.push(transaction.item)
@@ -111,7 +111,7 @@ exports.cancell = async (req, res) => {
 
   } catch (error) {
     await session.abortTransaction();
-    console.error('Failed to cancell', error);
-    return res.status(500).send({ message: "Failed to cancell" });
+    console.error('Failed to cancel', error);
+    return res.status(500).send({ message: "Failed to cancel" });
   }
 }

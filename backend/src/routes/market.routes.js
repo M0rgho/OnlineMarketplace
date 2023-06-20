@@ -14,7 +14,7 @@ module.exports = (app) => {
 
     app.post("/buy", controller.buy)
     
-    app.post("/cancell", controller.cancell)
+    app.post("/cancel", controller.cancel)
 
 
     app.get("/market_offers", controller.active_offers)
