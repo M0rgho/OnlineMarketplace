@@ -2,12 +2,34 @@
     flex: 1 1 auto;
   }
 
-.panel-button {
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10 50px;
+  margin-bottom: 40px;
+}
+
+.left-section {
+  display: flex;
+  align-items: center;
+}
+
+.right-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.toolbar-button {
   display: flex;
   align-items: center;
   color: black;
+  font-size: 30px;
+  cursor: pointer;
 }
 
-.panel-button:hover {
+.toolbar-button:hover {
   color: rgb(83, 83, 83);
 }

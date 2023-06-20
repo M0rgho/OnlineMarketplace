@@ -25,11 +25,4 @@ export class ItemsService {
   getItemTransactions(item_id: string) {
     return this.http.get<Item>('http://localhost:3000/transactions?item_id=' + item_id);
   }
-  
-  buy( userId: string, itemId:string){
-    // console.log("del"+ this.url+"/"+itemId)
-    // return this.http.delete(this.url+"/"+itemId);
-  }
-
-
 }

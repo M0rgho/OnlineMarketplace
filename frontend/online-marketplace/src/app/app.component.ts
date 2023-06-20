@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { AuthService } from 'src/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,14 +9,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  
-  constructor(private router: Router) {
+  token$: Observable<string> = of('');
+
+  constructor(private router: Router, private authService: AuthService) {
+    this.token$ = this.authService.getTokenObeservable();
   }
   title = 'online-marketplace';
+
   navUser(){
     this.router.navigate(['../user/'+localStorage.getItem("user")])
   }
-  loggedIn(){
-    return localStorage.getItem('id')
+
+  logout(){
+    console.log("logout!!");
+    this.authService.logout();
   }
 }

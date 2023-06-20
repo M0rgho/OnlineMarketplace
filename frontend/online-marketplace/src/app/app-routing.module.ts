@@ -5,7 +5,7 @@ import { UserComponent } from './components/user/user.component';
 import { MarketComponent } from './components/market/market.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AdminHubComponent } from './components/admin-hub/admin-hub.component';
-import { ItemDetailsComponent } from './item-details/item-details.component';
+import { ItemDetailsComponent } from './components/item-details/item-details.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },

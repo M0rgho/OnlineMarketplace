@@ -17,6 +17,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button'
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterComponent } from './components/register/register.component';
@@ -26,7 +27,8 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { AdminHubComponent } from './components/admin-hub/admin-hub.component';
 import { ItemComponent } from './components/item/item.component';
 import { FilterFormComponent } from './components/filter-form/filter-form.component';
-import { ItemDetailsComponent } from './item-details/item-details.component';
+import { ItemDetailsComponent } from './components/item-details/item-details.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import { ItemDetailsComponent } from './item-details/item-details.component';
     ItemComponent,
     FilterFormComponent,
     ItemDetailsComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     MatInputModule,
@@ -54,7 +57,9 @@ import { ItemDetailsComponent } from './item-details/item-details.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule
+
   ],
   providers: [ItemsService, AuthService],
   bootstrap: [AppComponent]

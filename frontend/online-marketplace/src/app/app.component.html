@@ -1,15 +1,22 @@
-<p style="margin-top: 0px;">
-    <mat-toolbar>
-     <a class="panel-button" [routerLink]="['/market']">
-        <mat-icon>store</mat-icon>
-     </a>
-     <a class="panel-button" [routerLink]="['/login']">
-        <mat-icon>login</mat-icon>
-     </a>
-     <a *ngIf="loggedIn()" class="panel-button" (click)="navUser()" >
-      <mat-icon>home</mat-icon>
-      </a>
-     <h2 style="margin-left: auto; font-weight: bolder;"> Online Marketplace </h2>
-  </mat-toolbar>
-  </p>
+<div style="margin-top: 0px;">
+   <mat-toolbar class="toolbar" [style.background-color]="(token$ | async) !== '' ? 'rgb(195, 195, 195)' : ''">
+      <div class="left-section" >
+        <h2 style="font-weight: bolder">Online Marketplace</h2>
+      </div>
+      <div class="right-section">
+        <a *ngIf="(token$ | async) !== ''" class="toolbar-button" (click)="navUser()">
+          <mat-icon class="mat-icon-lg" [inline]="true">person</mat-icon>
+        </a>
+        <a class="toolbar-button" [routerLink]="['/market']">
+          <mat-icon class="mat-icon-lg" [inline]="true">store</mat-icon>
+        </a>
+        <a *ngIf="(token$ | async) === ''"class="toolbar-button" [routerLink]="['/login']">
+          <mat-icon class="mat-icon-lg" [inline]="true">login</mat-icon>
+        </a>
+        <a *ngIf="(token$ | async) !== ''"class="toolbar-button" (click)="logout()">
+          <mat-icon class="mat-icon-lg" [inline]="true">logout</mat-icon>
+        </a>
+      </div>
+    </mat-toolbar>
+   </div>
 <router-outlet></router-outlet>

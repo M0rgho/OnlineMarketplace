@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { Item } from 'src/interfaces/Item';
 import { MarketTransaction } from 'src/interfaces/MarketTransaction';
 import { User } from 'src/interfaces/User';
@@ -8,17 +9,31 @@ import { User } from 'src/interfaces/User';
   providedIn: 'root'
 })
 export class MarketService {
-  constructor(private http: HttpClient) { }
+  private marketTransactionSubject = new BehaviorSubject<MarketTransaction[]>([]);
 
-  getData() {
+
+  constructor(private http: HttpClient) {
     const url = 'http://localhost:3000/market_offers';
 
-    return this.http.get<MarketTransaction[]>(url);
+    this.http.get<MarketTransaction[]>(url).subscribe(
+      (data: MarketTransaction[]) => {
+        this.marketTransactionSubject.next(data);
+      },
+      (error: any) => {
+        console.log("Failed to get market transactions!");
+        this.marketTransactionSubject.next([]);
+      });
   }
+
+  getActiveTransactions$() {
+    return this.marketTransactionSubject.asObservable();
+  }
+
 
   sell(item: Item, user: User){
     const url = 'http://localhost:3000/sell';
-    const transaction = {    postedDate: Date,
+    const transaction = {    
+      postedDate: Date,
       price: item.price,
       status: 'Active',
       seller: user,
@@ -38,8 +53,8 @@ export class MarketService {
     console.log(offer)
     return this.http.post<MarketTransaction[]>(url, offer);
   }
-  cancell(item: MarketTransaction){
-    const url = 'http://localhost:3000/cancell';
+  cancel(item: MarketTransaction){
+    const url = 'http://localhost:3000/cancel';
 
     return this.http.post<MarketTransaction[]>(url, item);
   }

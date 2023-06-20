@@ -11,7 +11,7 @@ export class UserService {
   private url = 'http://localhost:3000/user/';
   constructor(private http: HttpClient, private authService: AuthService) { }
 
-  getUser(username: string | null) {
+  getUserData(username: string | null) {
     var token = localStorage.getItem('token')
     const httpOptions = {
       headers: new HttpHeaders({
