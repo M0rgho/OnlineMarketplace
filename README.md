@@ -13,12 +13,11 @@ Mikołaj Maślak
 Szymon Głomski
 
 ## Dokumantacja
+# Baza 
 Baza danych posiada 3 kolekcje:
-
 - items
 - markettrasactions
 - users
-
 
 item: 
 - _id - identyfikator
@@ -50,4 +49,27 @@ user:
 - balance - stan konta
 - items - tablica przedmiotów w urzytkownika
   
+# Backend
+  - post /auth/signup
+    - Tworzy nowego użytkownika, request powinien zawierać obiekt user. 
+  - post /auth/signin
+    - Odpowiada za autentykacje, request powinien zawierać obiekt {username: string, password: string}
+  - post /sell
+    - Tworzy oferte i wystawia ją na rynek, request powinien zawierać oiekt marketTransactions
+  - post /buy
+    - Odpowiada za kupno przedmiotu, request powinien zawierać obiekt {transaction: marketTransaction, username: string}. (username kupującego)
+  - post /cancell
+    - Wycofuje ofertę z marketu i przedmiot wraca do ekwipunku właściciela. Request powinien zawierać obiekt marketTransactions
+  - get /market_offers
+    - Zwraca aktywne oferty
+  - get /user/:username
+    - Zwraca informacje o użytkowniku
+    
+  # Frontend
+  - /admin Formularz do tworzenia przedmiotów. Nowy przedmiot pojawia się w ekwipunku admina
+  - /login Formularz umożliwiające logowanie
+  - /market Wyświetla aktualne ofrty
+  - /register Formularz umożliwiający stworzenie konta
+  - /user/:username Ekwipunek zalogowanego użytkownika
+  - /item-details.:_id Szegółowe informacje o przedmiotach, historia transakcji
   
