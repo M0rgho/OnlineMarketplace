@@ -5,9 +5,10 @@ import { FilterOption } from 'src/interfaces/FilterOption';
 import { Item } from 'src/interfaces/Item';
 import { MarketTransaction } from 'src/interfaces/MarketTransaction';
 import { MarketService } from 'src/services/market.service';
-import { MatDialog } from '@angular/material/dialog';
-import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirmation-dialog.component';
-
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from 'src/app/components/confirmation-dialog/confirmation-dialog.component';
+import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
+import { AuthService } from 'src/services/auth.service';
 
 @Component({
   selector: 'app-market',
@@ -22,6 +23,7 @@ export class MarketComponent {
   filter: Filter = new Filter(this.option)
   constructor(
     private marketService: MarketService,
+    private authService: AuthService,
     public dialog: MatDialog) {}
     
   ngOnInit() {
@@ -33,8 +35,7 @@ export class MarketComponent {
     return this.filter.check(item)
   }
   checkToken(transaction: MarketTransaction){
-    // console.log(transaction.seller)
-    return localStorage.getItem('id') != null && localStorage.getItem('id') != transaction.seller
+    return localStorage.getItem('id') !== transaction.seller
   }
 
   cancel(item: MarketTransaction){
@@ -43,16 +44,30 @@ export class MarketComponent {
 
   openSellItemDialog(sellOffer: MarketTransaction): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      data: { text: 'Are you sure you want to buy this item?', loggedIn: true }
+      data: { text: 'Are you sure you want to buy this item?', loggedIn: this.authService.isUserLoggedIn() }
     });
   
     dialogRef.afterClosed().subscribe((confirm: boolean | number) => {
       if (confirm) {
         console.log('User ' + localStorage.getItem("user")! + 'bought form price: ' + sellOffer.price);
         this.marketService.buy(sellOffer, localStorage.getItem("user")!).subscribe((res: any) => {
-            window.alert(res.body.message ?? "No server response message");
+          window.alert(res.body.meessage ?? "Successfully bought the item");
+            
+        }, (error: any) => {
+          console.log(error);
+          this.openErrorDialog(error.error.message);
         })
       }
     });
   }
+  
+  openErrorDialog(errorMessage: string): void {
+    this.dialog.open(ErrorDialogComponent,  {
+      data: {
+        message: errorMessage
+      },
+    },);
+  }
+
 }
+

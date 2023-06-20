@@ -28,10 +28,11 @@ import { AdminHubComponent } from './components/admin-hub/admin-hub.component';
 import { ItemComponent } from './components/item/item.component';
 import { FilterFormComponent } from './components/filter-form/filter-form.component';
 import { ItemDetailsComponent } from './components/item-details/item-details.component';
-import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { MarketService } from 'src/services/market.service';
 
 import { TokenInterceptor } from './token-interceptor';
+import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { TokenInterceptor } from './token-interceptor';
     ItemComponent,
     FilterFormComponent,
     ItemDetailsComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    ErrorDialogComponent
   ],
   imports: [
     MatInputModule,

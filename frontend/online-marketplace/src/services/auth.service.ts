@@ -33,6 +33,10 @@ export class AuthService {
     return this.http.post(this.url + "/signup", user);
   }
 
+  isUserLoggedIn(): boolean {
+    return this.getToken() !== '';
+  }
+
   async login(loginData: any) {
     const res: any = await lastValueFrom(this.http.post(this.url + "/signin", loginData));
     console.log(res);
