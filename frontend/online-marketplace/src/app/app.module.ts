@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ItemsService } from '../services/items.service';
 import { LoginComponent } from './components/login/login.component';
 import { MarketComponent } from './components/market/market.component';
@@ -29,6 +29,9 @@ import { ItemComponent } from './components/item/item.component';
 import { FilterFormComponent } from './components/filter-form/filter-form.component';
 import { ItemDetailsComponent } from './components/item-details/item-details.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { MarketService } from 'src/services/market.service';
+
+import { TokenInterceptor } from './token-interceptor';
 
 @NgModule({
   declarations: [
@@ -61,7 +64,17 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     MatDialogModule
 
   ],
-  providers: [ItemsService, AuthService],
+  providers: [
+    ItemsService, 
+    AuthService,
+    MarketService,
+
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
