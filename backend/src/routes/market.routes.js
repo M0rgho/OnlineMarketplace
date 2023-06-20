@@ -12,6 +12,8 @@ module.exports = (app) => {
     // app.post("/sell", [verifyToken], controller.sell)
     app.post("/sell", controller.sell)
 
+    app.post("/buy", controller.buy)
+
 
     app.get("/market_offers", controller.active_offers)
 }

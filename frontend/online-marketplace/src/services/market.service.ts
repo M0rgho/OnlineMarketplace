@@ -29,4 +29,13 @@ export class MarketService {
     return this.http.post<MarketTransaction[]>(url, transaction);
   }
 
+  buy(transaction: MarketTransaction, username: string){
+    const url = 'http://localhost:3000/buy';
+    const offer = {
+      username: username,
+      transaction: transaction
+    }
+    console.log(offer)
+    return this.http.post<MarketTransaction[]>(url, offer);
+  }
 }
