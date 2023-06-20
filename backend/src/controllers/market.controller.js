@@ -98,7 +98,7 @@ exports.cancel = async (req, res) => {
     const transaction = await MarketTransaction.findOne({ _id: req.body._id});
     const seller = await User.findOne({_id: transaction.seller});
 
-    transaction.status = 'cancelled';
+    transaction.status = 'Cancelled';
     transaction.sellDate = Date.now();
 
     seller.items.push(transaction.item)
