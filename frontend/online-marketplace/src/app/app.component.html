@@ -6,6 +6,9 @@
      <a class="panel-button" [routerLink]="['/login']">
         <mat-icon>login</mat-icon>
      </a>
+     <a *ngIf="loggedIn()" class="panel-button" (click)="navUser()" >
+      <mat-icon>home</mat-icon>
+      </a>
      <h2 style="margin-left: auto; font-weight: bolder;"> Online Marketplace </h2>
   </mat-toolbar>
   </p>
