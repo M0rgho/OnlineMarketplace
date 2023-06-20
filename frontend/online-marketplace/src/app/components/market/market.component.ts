@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Filter } from 'src/app/utils/filter';
 import { FilterOption } from 'src/interfaces/FilterOption';
 import { Item } from 'src/interfaces/Item';
 import { MarketTransaction } from 'src/interfaces/MarketTransaction';
 import { MarketService } from 'src/services/market.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from 'src/app/confirmation-dialog/confirmation-dialog.component';
+
 
 @Component({
   selector: 'app-market',
@@ -11,14 +15,18 @@ import { MarketService } from 'src/services/market.service';
   styleUrls: ['./market.component.css'],
 })
 export class MarketComponent {
-  transactions: MarketTransaction[] | null = null;
+  transactions$: Observable<MarketTransaction[]> = new Observable<MarketTransaction[]>();
   selected = 'none'
   option: FilterOption = {name:'', rarity:'none', type:'none',condition:'none',fromCollection:'',price:0}
 
   filter: Filter = new Filter(this.option)
-  constructor(private service: MarketService) {}
+  constructor(
+    private marketService: MarketService,
+    public dialog: MatDialog) {}
+    
   ngOnInit() {
-    this.updateData()
+    this.transactions$ = this.marketService.getActiveTransactions$();
+    this.transactions$.subscribe(transitions => console.log(transitions));
   }
 
   check(item: Item){
@@ -29,16 +37,22 @@ export class MarketComponent {
     return localStorage.getItem('id') != null && localStorage.getItem('id') != transaction.seller
   }
 
-  updateData(){
-    this.service.getData().subscribe(res=>{
-      this.transactions=res
-      console.log(this.transactions)
-    })
+  cancel(item: MarketTransaction){
+    this.marketService.cancel(item).subscribe()
   }
-  buy(item: MarketTransaction){
-    this.service.buy(item, localStorage.getItem("user")!).subscribe()
-  }
-  cancell(item: MarketTransaction){
-    this.service.cancell(item).subscribe()
+
+  openSellItemDialog(sellOffer: MarketTransaction): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: { text: 'Are you sure you want to buy this item?', loggedIn: true }
+    });
+  
+    dialogRef.afterClosed().subscribe((confirm: boolean | number) => {
+      if (confirm) {
+        console.log('User ' + localStorage.getItem("user")! + 'bought form price: ' + sellOffer.price);
+        this.marketService.buy(sellOffer, localStorage.getItem("user")!).subscribe((res: any) => {
+            window.alert(res.body.message ?? "No server response message");
+        })
+      }
+    });
   }
 }

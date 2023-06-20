@@ -23,7 +23,7 @@ export class UserComponent {
   })
   constructor(
     private route: ActivatedRoute, 
-    private service: UserService,
+    private userService: UserService,
     private router: Router, 
     private marketService: MarketService){}
 
@@ -38,11 +38,11 @@ export class UserComponent {
   }
   addMoney(){
     var money = this.formGroup.get('addControl')?.value
-    this.service.transfer(this.username,this.user.balance+money)
+    this.userService.transfer(this.username,this.user.balance+money)
     .subscribe( () => this.getData())
   }
   getData(){
-    this.service.getUser(this.username).subscribe( user =>{
+    this.userService.getUserData(this.username).subscribe( user =>{
       this.user = user
       console.log(this.user)
   }, (err) => {
