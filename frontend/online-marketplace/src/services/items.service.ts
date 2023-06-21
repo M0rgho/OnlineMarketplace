@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Item } from '../interfaces/Item'
+import { MarketTransaction } from 'src/interfaces/MarketTransaction';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,6 @@ export class ItemsService {
   }
 
   getItemTransactions(item_id: string) {
-    return this.http.get<Item>('http://localhost:3000/transactions?item_id=' + item_id);
+    return this.http.get<MarketTransaction[]>('http://localhost:3000/market/transactions?item_id=' + item_id);
   }
 }

@@ -3,6 +3,10 @@
     <div class="user_data">
       <div *ngIf="user" class="flex-container">
         <div class="info-item">
+          <span>user_id:</span>
+          <span>{{ user._id }}</span>
+        </div>
+        <div class="info-item">
           <span>Username:</span>
           <span>{{ user.username }}</span>
         </div>
@@ -66,10 +70,9 @@
         <mat-tab label="Active Sell Offers" class="tab">
           <div *ngIf="user.transactions">
             <div *ngFor="let transaction of user.transactions">
-              <div *ngIf="transaction.status === 'Active'">
-                <app-item [item]="transaction.item" [itemOnSale]="false" [price]="transaction.price">
-                </app-item>
-                <button (click)="cancel(transaction)" mat-raised-button color="primary">cancel offer</button>
+              <div *ngIf="transaction.status === 'Active'" style="display: flex; align-items: center; flex-flow: column;">
+                <app-transaction [transaction]="transaction"> </app-transaction>
+                <button (click)="cancel(transaction)" style="max-width: 200px; position: relative;top: -25px" mat-raised-button color="primary">cancel offer</button>
               </div>
               
             </div>
@@ -80,19 +83,25 @@
         </mat-tab>
       
         <mat-tab label="Transaction History" class="tab">
-          <div *ngIf="user.transactions">
+          <h2>Sold:</h2>
+          <div *ngIf="user.transactions ">
             <div *ngFor="let transaction of user.transactions">
-              <div *ngIf="transaction.status !== 'Active'">
-                <h2> {{ transaction.status }} {{ transaction.status === 'Successful' ? 'Sold for: ' + transaction.price : '' }}
-                </h2>
-                <app-item  [item]="transaction.item" [itemOnSale]="false" [price]="transaction.price">
-                </app-item>
+              <div *ngIf="transaction.status === 'Successful' && transaction.seller === user._id" style="display: flex; align-items: center; flex-flow: column;">
+                <app-transaction [transaction]="transaction"> </app-transaction>
               </div>
             </div>
           </div>
           <p *ngIf="!user.transactions"> 
             no transaction in history
           </p>
+          <h2>Bought:</h2>
+          <div *ngIf="user.transactions ">
+            <div *ngFor="let transaction of user.transactions">
+              <div *ngIf="transaction.status === 'Successful' && transaction.buyer === user._id" style="display: flex; align-items: center; flex-flow: column;">
+                <app-transaction [transaction]="transaction"> </app-transaction>
+              </div>
+            </div>
+          </div>
         </mat-tab>
       </mat-tab-group>
     </div>

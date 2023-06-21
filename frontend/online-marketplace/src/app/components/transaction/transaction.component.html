@@ -1,0 +1,12 @@
+<mat-card *ngIf="transaction" class="transaction-card">
+    <div class="transaction-info">
+      <p>Posted Date: {{ transaction.postedDate | date }}</p>
+      <p>Price: {{ transaction.price }}</p>
+      <p>Seller: {{ transaction.seller }}</p>
+      <p *ngIf="transaction.sellDate">Sell Date: {{ transaction.sellDate | date }}</p>
+      <p *ngIf="transaction.buyer">Buyer: {{ transaction.buyer }}</p>
+    </div>
+    <div class="item-details">
+        <app-item [item]="transaction.item"></app-item>
+    </div>
+  </mat-card>

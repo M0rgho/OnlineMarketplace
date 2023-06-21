@@ -71,7 +71,7 @@ exports.transactions = async (req, res) => {
     const status = req.query.status;
     const seller = req.query.seller;
     const buyer = req.query.buyer;
-    const item = req.query.item;
+    const item = req.query.item_id;
     
     const filter = { };
     
@@ -80,17 +80,21 @@ exports.transactions = async (req, res) => {
         return res.status(400).json({ error: 'Invalid status parameter.' });
         filter.status = status;
     }
-    
-    if (seller !== undefined) {
+    if (seller !== undefined && buyer !== undefined) {
+        filter['$or'] = [
+            { seller: seller },
+            { buyer: buyer }
+          ];
+    }
+    else if (seller !== undefined) {
         filter.seller = seller;
     }
-    
-    if (buyer !== undefined) {
+    else if (buyer !== undefined) {
         filter.buyer = buyer;
     }
     
     if (item !== undefined) {
-        filter.item = item;
+        filter['item._id'] = item;
     }
     console.log("filter", filter);
     const transactions = await MarketTransaction.find(filter).limit(1000).lean();

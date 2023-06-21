@@ -29,7 +29,7 @@ export class MarketService {
   }
 
   getUserTransactions(user_id: string) {
-    return this.http.get<MarketTransaction[]>(`${MarketService.url}/transactions?user=user_id`);
+    return this.http.get<MarketTransaction[]>(`${MarketService.url}/transactions?buyer=user_id&seller=user_id`);
   }
 
   getItemTransactions(item_id: string) {

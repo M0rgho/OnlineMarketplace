@@ -6,8 +6,12 @@
     <hr>
     <div class="trasaction-history">
         <h3> Historia transakcji: </h3>  
-        <ul>
-            <li *ngFor="let transaction of transactions">{{ transaction }}</li>
-        </ul>
+        <div class="transaction-list">
+            
+            <div *ngFor="let transaction of transactions">
+                <app-transaction 
+                *ngIf="transaction.status === 'Successful'" [transaction]="transaction"> </app-transaction>
+            </div>
+        </div>
     </div>
 </div>

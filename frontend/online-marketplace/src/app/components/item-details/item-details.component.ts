@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Item } from 'src/interfaces/Item';
+import { MarketTransaction } from 'src/interfaces/MarketTransaction';
 import { ItemsService } from 'src/services/items.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { ItemsService } from 'src/services/items.service';
 export class ItemDetailsComponent {
   item_id!: string;
   item$!: Observable<Item>;
-  transactions: string[] = ['Transaction 1', 'Transaction 2', 'Transaction 3'];
+  transactions: MarketTransaction[] = [];
 
   constructor (
     private route: ActivatedRoute,
@@ -24,6 +25,9 @@ export class ItemDetailsComponent {
       this.item_id = params.get('_id')!;
       this.item$ = this.itemsService.getItem(this.item_id)
       this.item$.subscribe(item => console.log(item));
-     }) 
+      this.itemsService.getItemTransactions(this.item_id).subscribe(trans => {
+        this.transactions = trans;
+      });
+     })
   }
 }

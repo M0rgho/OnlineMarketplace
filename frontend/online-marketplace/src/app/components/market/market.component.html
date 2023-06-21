@@ -3,10 +3,9 @@
 </app-filter-form>
 
 <div>
-    <div *ngFor="let transaction of transactions$ | async">
+    <div *ngFor="let transaction of transactions$ | async" style="display: flex; flex-flow: column; align-items: left;">
         <app-item *ngIf="filter_item(transaction)" [item]="transaction.item" [itemOnSale]="true" [price]="transaction.price">
         </app-item>
-        <button mat-raised-button *ngIf="filter_item(transaction) && !isOwner(transaction)" color="primary" (click)="openSellItemDialog( transaction)">Buy Item</button>
-        <button *ngIf="filter_item(transaction) && isOwner(transaction)" (click)="cancel(transaction)" mat-raised-button color="primary">cancel offer</button>
+        <button (click)="openSellItemDialog(transaction)" mat-raised-button color="primary" style="max-width: 200px; position: relative;top: -25px">Buy Item</button>
     </div>
 </div>

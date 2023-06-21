@@ -2,6 +2,7 @@ import { Item } from "./Item"
 import { MarketTransaction } from "./MarketTransaction"
 
 export interface User{
+    _id?: string,
     username: string,
     password: string,
     firstname: string,
