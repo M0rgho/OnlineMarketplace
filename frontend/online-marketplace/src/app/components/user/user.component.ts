@@ -72,7 +72,9 @@ export class UserComponent {
   
     dialogRef.afterClosed().subscribe((confirm: boolean | number) => {
       if (confirm) {
+  
         this.marketService.sell(item).subscribe((res: any) => {
+          this.getData()
           this.dialog.open(ErrorDialogComponent,  {
             data: {
               message: res?.body?.meessage || "Successfully put item up for sale"
@@ -92,7 +94,8 @@ export class UserComponent {
 
   cancel(item: MarketTransaction){
     this.marketService.cancel(item).subscribe((res: any) => {
-      window.alert(res.body.meessage ?? "Successfully cancelled item sell offer");
+      this.getData()
+      window.alert(res.meessage ?? "Successfully cancelled item sell offer");
         
     }, (error: any) => {
       console.log(error);

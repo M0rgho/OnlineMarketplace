@@ -177,10 +177,10 @@ exports.cancel = async (req, res) => {
             ]);
             
             if (!transaction) {
-                return res.status(404).json({ message: 'Transaction not found' });
+                return res.status(404).send({ message: 'Transaction not found' });
             }
             if (transaction.status !== 'Active') {
-                return res.status(404).json({ message: 'Transaction not active' });
+                return res.status(404).send({ message: 'Transaction not active' });
             }
             
             if(req.body.user.user_id.toString() !== transaction.seller.toString())
@@ -197,9 +197,9 @@ exports.cancel = async (req, res) => {
                 transaction.save({ session }),
                 seller.save({ session })
             ]);
-            
-            return res.status(200).json({ message: "Item sell offer cancelled sucessfully" });
-            
+   
+            return res.status(200).send({ message: "Item sell offer cancelled sucessfully" });
+
         });
     } catch (error) {
         console.error('Failed to cancel', error);

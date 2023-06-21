@@ -27,10 +27,12 @@ export class MarketComponent {
     public dialog: MatDialog) {}
     
   ngOnInit() {
+    this.getData()
+  }
+  getData(){
     this.transactions$ = this.marketService.getActiveTransactions$();
     this.transactions$.subscribe(transitions => console.log(transitions));
   }
-
   filter_item(transaction: MarketTransaction){
     transaction.item.price = transaction.price
     return this.filter.check(transaction.item)
@@ -41,7 +43,8 @@ export class MarketComponent {
 
   cancel(item: MarketTransaction){
     this.marketService.cancel(item).subscribe((res: any) => {
-      window.alert(res.body.meessage ?? "Successfully cancelled item sell offer");
+      this.getData()
+      window.alert(res.meessage ?? "Successfully cancelled item sell offer");
         
     }, (error: any) => {
       console.log(error);
@@ -58,6 +61,7 @@ export class MarketComponent {
       if (confirm) {
         console.log('User ' + localStorage.getItem("user")! + 'bought form price: ' + sellOffer.price);
         this.marketService.buy(sellOffer, localStorage.getItem("user")!).subscribe((res: any) => {
+          this.getData()
           this.dialog.open(ErrorDialogComponent,  {
             data: {
               message: "Successfully bought the item"

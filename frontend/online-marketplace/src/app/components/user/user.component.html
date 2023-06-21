@@ -54,7 +54,7 @@
         <mat-tab label="Inventory">
           <app-filter-form [option]="option">
           </app-filter-form>
-          <div *ngFor="let item of user.items">
+          <div *ngFor="let item of user.items" class="outer">
               <app-item *ngIf="check(item)" [item]="item" [itemOnSale]="false">
               </app-item> 
               <div *ngIf="check(item)" class="sellButton">

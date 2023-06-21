@@ -2,6 +2,9 @@
 app-item, button{
     width: 80%;
   }
+  .outer{
+    width: 70vw;
+  }
 .container{
     margin-left: 2vw;
     display: flex;
