@@ -1,7 +1,7 @@
 <div class="container">
     <!-- <app-logout></app-logout> -->
-    <div class="user_data">
-      <div *ngIf="user" class="flex-container">
+    <div *ngIf="user" class="user_data">
+      <div class="flex-container">
         <div class="info-item">
           <span>user_id:</span>
           <span>{{ user._id }}</span>
@@ -39,16 +39,13 @@
           <span>{{user.preferences?.private_inventory ?? "not set"}}</span>
         </div>
       </div>
-      <div *ngIf="!user" style="color: rgb(88, 20, 20);"> 
-        NO USER INFORMATION FOUND
-      </div>
+      
         <form [formGroup] = "formGroup" class="add_money" action="">
             <label for="balance">add money</label>
             <input type="number" formControlName="addControl" style="display: inline;">
             <button (click)="addMoney()" >add</button>
         </form>
     </div>
-    
     <div *ngIf="user" class="tabs">
       <mat-tab-group>
         <mat-tab label="Inventory">
@@ -105,5 +102,7 @@
         </mat-tab>
       </mat-tab-group>
     </div>
-    
+    <div *ngIf="!user" style="color: rgb(88, 20, 20); text-align: center; font-weight: bolder; font-size: 5em;"> 
+      NO USER INFORMATION FOUND
+    </div>
 </div>

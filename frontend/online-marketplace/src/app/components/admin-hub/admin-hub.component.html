@@ -1,59 +1,75 @@
-<mat-card>
-    <mat-card-title>Add item</mat-card-title>
-    <mat-card-content>
-        
-            <mat-form-field>
-                <mat-label>name</mat-label>
-                <input matInput [(ngModel)]="item.name">
-            </mat-form-field>
+<div class="main-div">
+    <mat-card style="padding: 30px;">
+        <div style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">Add item</div>
+        <mat-card-content>
+            
+                <mat-form-field>
+                    <mat-label>name</mat-label>
+                    <input matInput [(ngModel)]="item.name">
+                </mat-form-field>
 
-            <mat-form-field>
-                <mat-label>Select type</mat-label>
-                <mat-select [(value)]="item.type">
+                <mat-form-field>
+                    <mat-label>Select type</mat-label>
+                    <mat-select [(value)]="item.type">
+                        <mat-option value="none">none</mat-option>
+                        <mat-option value="weapon">weapon</mat-option>
+                        <mat-option value="gloves">gloves</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>imgUrl</mat-label>
+                    <input matInput [(ngModel)]="item.imgUrl">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>price</mat-label>
+                    <input type="number" matInput [(ngModel)]="item.price">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Select rarity</mat-label>
+                    <mat-select [(value)]="item.rarity">
                     <mat-option value="none">none</mat-option>
-                    <mat-option value="weapon">weapon</mat-option>
-                    <mat-option value="gloves">gloves</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>imgUrl</mat-label>
-                <input matInput [(ngModel)]="item.imgUrl">
-            </mat-form-field>
+                    <mat-option value="common">common</mat-option>
+                    <mat-option value="uncommon">uncommon</mat-option>
+                    <mat-option value="rare">rare</mat-option>
+                    <mat-option value="epic">epic</mat-option>
+                    <mat-option value="legendary">legendary</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>collection</mat-label>
+                    <input matInput [(ngModel)]="item.fromCollection">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Select condition</mat-label>
+                    <mat-select [(value)]="item.condition">
+                    <mat-option value="none">none</mat-option>
+                    <mat-option value="battle-scarred">battle-scarred</mat-option>
+                    <mat-option value="well-worn">well-worn</mat-option>
+                    <mat-option value="field-tested">field-tested</mat-option>
+                    <mat-option value="minimal-wear">minimal-wear</mat-option>
+                    <mat-option value="factory-new">factory-new</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="button">
+            
+                    <button (click)="submit()" mat-raised-button color="primary">add</button>
+                </div>
 
-            <mat-form-field>
-                <mat-label>price</mat-label>
-                <input type="number" matInput [(ngModel)]="item.price">
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>Select rarity</mat-label>
-                <mat-select [(value)]="item.rarity">
-                <mat-option value="none">none</mat-option>
-                <mat-option value="common">common</mat-option>
-                <mat-option value="uncommon">uncommon</mat-option>
-                <mat-option value="rare">rare</mat-option>
-                <mat-option value="epic">epic</mat-option>
-                <mat-option value="legendary">legendary</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>collection</mat-label>
-                <input matInput [(ngModel)]="item.fromCollection">
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>Select condition</mat-label>
-                <mat-select [(value)]="item.condition">
-                <mat-option value="none">none</mat-option>
-                <mat-option value="battle-scarred">battle-scarred</mat-option>
-                <mat-option value="well-worn">well-worn</mat-option>
-                <mat-option value="field-tested">field-tested</mat-option>
-                <mat-option value="minimal-wear">minimal-wear</mat-option>
-                <mat-option value="factory-new">factory-new</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <div class="button">
-        
-                <button (click)="submit()" mat-raised-button color="primary">add</button>
-            </div>
-
-    </mat-card-content>
-</mat-card>
+        </mat-card-content>
+    </mat-card>
+    <mat-card style="padding: 30px; width: 200px;">
+        <div style="font-size: 24px; font-weight: bold; margin-bottom: 10px;">All Users</div>
+        <mat-card-content>
+          <div *ngFor="let user of users">
+            <a [routerLink]="['/user', user.username]" style="text-decoration: none; color: #000;">
+              <mat-card class="user-card" style="padding: 10px; margin-bottom: 10px;">
+                <mat-card-title>{{ user.username }}</mat-card-title>
+                <mat-card-subtitle>Role: {{ user.role }}</mat-card-subtitle>
+              </mat-card>
+            </a>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      
+</div>
