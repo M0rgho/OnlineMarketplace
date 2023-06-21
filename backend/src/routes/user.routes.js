@@ -11,5 +11,7 @@ module.exports = (app) => {
       });
     app.get("/user/:username",[verifyToken], controller.userAccess);
 
+    app.get("/users", controller.allUsers);
+
     app.patch("/user/:username",[verifyToken], controller.addMoney);
 }

@@ -15,6 +15,10 @@ export class UserService {
     return this.http.get<User>(`${this.url}${username}?items=1&transactions=1`)
   }
 
+  getAllUsers() {
+    return this.http.get<{_id: string, role: string, username: string}[]>('http://localhost:3000/users')
+  }
+
   transfer(username: string|null, money: number){
     return this.http.patch(this.url + username, {"balance": money})
   }

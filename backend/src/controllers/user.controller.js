@@ -58,3 +58,21 @@ exports.addMoney = async (req, res) => {
     // const userData = await userModel.findOneAndUpdate({ username: req.params.username }, req.body, {upsert: true});
 
 }
+
+
+exports.allUsers = async (req, res) => {
+    try {
+        let userData;
+        let projection = 'username role'
+        
+        userData = await userModel.find({ })
+        .select(projection)
+        .lean()
+        
+        res.send(userData);
+    } catch(error) {
+        console.log(error);
+        res.status(500).json("Internal server error: " + error);
+    }
+    
+}
