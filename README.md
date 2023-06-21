@@ -19,36 +19,60 @@ Baza danych posiada 3 kolekcje:
 - markettrasactions
 - users
 
-item: 
-- _id - identyfikator
-- name - nazwa
-- date - data powstania 
-- type - typ ['weapon', 'gloves']
-- imgUrl - scieżka do zdjęcia
-- fromCollection - nazwa kolekcji
-- rarity - rzadkość przedmiotu ['common', 'uncommon', 'rare', 'epic', 'legendary']
-- condition - stan przedmiotu ['battle-scarred', 'well-worn','field-tested','minimal-wear','factory-new']
+## Item
+```ts
+export interface Item {
+    _id?: string;
+    name: string;
+    date: Date;
+    type: string; // ['weapon', 'gloves']
+    imgUrl: string;
+    fromCollection: string;
+    rarity: string; // ['common', 'uncommon', 'rare', 'epic', 'legendary']
+    condition: string; // ['battle-scarred', 'well-worn','field-tested','minimal-wear','factory-new']
+    // price present only if Item is on sale
+    price?: number;
+}
+```
+## MarketTransaction
+```ts
+export interface MarketTransaction {
+    _id: string,
+    // item data
+    item: Item,
 
-marketTransaction:
-- item
-- postedDate - data publikacji ogłoszenia
-- price - cena przedmiotu
-- status - status ['Active', 'Cancelled', 'Successful']
-- seller - id sprzedającego
-- sellDate - data finalizacji transakcji
-- buyer - id kupującego
+    // offer data
+    postedDate: Date,
+    price: number
+    status: string, // status ['Active', 'Cancelled', 'Successful']
+    seller: string,
+    sellDate?: Date,
+    buyer?: User
+};
+```
+## User
+```ts
+export interface User{
+    _id?: string,
+    username: string,
+    password: string,
+    firstname: string,
+    lastname: string,
+    email: string,
+    role: string, // ['USER', 'ADMIN'] 
+    registrationDate?: Date,
+    lastLoginDate?: Date,
+    balance: number,
+    items: Item[],
+    transactions?: MarketTransaction[],
+    preferences?: {
+        dark_mode: boolean
+        private_inventory: boolean
+    }
+};
+```
 
-user:
-- username 
-- password - hasło
-- firstname - imię
-- lastname - nazwisko
-- email - email
-- role - ['USER', 'ADMIN']
-- registrationDate - data rejestracji
-- balance - stan konta
-- items - tablica przedmiotów w urzytkownika
-  
+
 # Backend
   - post /auth/signup
     - Tworzy nowego użytkownika, request powinien zawierać obiekt user. 
@@ -58,12 +82,15 @@ user:
     - Tworzy oferte i wystawia ją na rynek, request powinien zawierać oiekt marketTransactions
   - post /buy
     - Odpowiada za kupno przedmiotu, request powinien zawierać obiekt {transaction: marketTransaction, username: string}. (username kupującego)
-  - post /cancell
+  - post /cancel
     - Wycofuje ofertę z marketu i przedmiot wraca do ekwipunku właściciela. Request powinien zawierać obiekt marketTransactions
-  - get /market_offers
-    - Zwraca aktywne oferty
+  - get /transactions?status=...&seller=...*buyer=...&item=...
+    - Zwraca wszystkie transakcje spełniające ustalona warunki
   - get /user/:username
     - Zwraca informacje o użytkowniku
+  - get /users
+    - Zwraca ogólną listę wszystkich użytkowników
+ 
     
   # Frontend
   - /admin Formularz do tworzenia przedmiotów. Nowy przedmiot pojawia się w ekwipunku admina
