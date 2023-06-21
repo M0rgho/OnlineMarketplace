@@ -6,7 +6,8 @@ const itemSchema = require('./Item').itemSchema;
 const marketTransactionSchema = new mongoose.Schema({
     item: {
         type: itemSchema,
-        ref: 'Item'
+        ref: 'Item',
+        index: true
     },
     postedDate: { type: Date, default: Date.now },
     price: { type: Number, required: true},

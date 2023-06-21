@@ -31,10 +31,10 @@ export class MarketComponent {
     this.transactions$.subscribe(transitions => console.log(transitions));
   }
 
-  check(item: Item){
+  filter_item(item: Item){
     return this.filter.check(item)
   }
-  checkToken(transaction: MarketTransaction){
+  isOwner(transaction: MarketTransaction) {
     return localStorage.getItem('id') !== transaction.seller
   }
 

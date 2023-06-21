@@ -11,11 +11,12 @@ const mongoose = require('mongoose');
 //   }
 // }
 
-async function ownsItem(user_id, item_id) {
+async function ownsItem(user_id, item_id, session) {
     const user = await User.findOne({
         _id: user_id,
-        items: { $elemMatch: { _id: item_id } }
-    });
+        items: item_id
+    }).session(session);
+    console.log(user);
     return !!user;
 }
 
@@ -23,17 +24,15 @@ exports.sell = async (req, res) => {
     console.log("SELL");
     const session = await mongoose.startSession();
     session.startTransaction();
-    
+    console.log(req.body);
     try {
         const item_id = req.body.transaction.item_id;
-        const seller_username = req.body.transaction.seller_name;
-        
         
         const item = await Item.findById(item_id).session(session);
         if (!item)
         return res.status(404).send({ message: "Item not found." });
-                
-        if(!ownsItem(req.body.user.user_id, item_id))
+        console.log(req.body.user.user_id, item_id);
+        if(! await ownsItem(req.body.user.user_id, item_id, session))
             return res.status(403).send({ message: "You are not the owner of the item" });
         const sellTransaction = new MarketTransaction({
             price: req.body.transaction.price,
@@ -55,46 +54,48 @@ exports.sell = async (req, res) => {
             
             return res.status(201).send({ message: "Successfully created sell transaction" });
         } catch (error) {
-            await session.abortTransaction();
             console.error('Failed to create sell transaction', error);
             return res.status(500).send({ message: "Failed to create sell offer:" + error });
         } finally {
+            if (session.inTransaction()) {
+                await session.abortTransaction();
+            }
             session.endSession();
         }
     };
     
     
     
-    exports.transactions = async (req, res) => {
-        const allowedStatus = ['Active', 'Cancelled', 'Successful'];
-        const status = req.query.status;
-        const seller = req.query.seller;
-        const buyer = req.query.buyer;
-        const item = req.query.item;
-        
-        const filter = { };
-        
-        if (status !== undefined) {
-            if (!allowedStatus.includes(status))
-            return res.status(400).json({ error: 'Invalid status parameter.' });
-            filter.status = status;
-        }
-        
-        if (seller !== undefined) {
-            filter.seller = seller;
-        }
-        
-        if (buyer !== undefined) {
-            filter.buyer = buyer;
-        }
-        
-        if (item !== undefined) {
-            filter.item = item;
-        }
-        console.log("filter", filter);
-        const transactions = await MarketTransaction.find(filter).limit(1000).lean();
-        return res.json(transactions);
+exports.transactions = async (req, res) => {
+    const allowedStatus = ['Active', 'Cancelled', 'Successful'];
+    const status = req.query.status;
+    const seller = req.query.seller;
+    const buyer = req.query.buyer;
+    const item = req.query.item;
+    
+    const filter = { };
+    
+    if (status !== undefined) {
+        if (!allowedStatus.includes(status))
+        return res.status(400).json({ error: 'Invalid status parameter.' });
+        filter.status = status;
     }
+    
+    if (seller !== undefined) {
+        filter.seller = seller;
+    }
+    
+    if (buyer !== undefined) {
+        filter.buyer = buyer;
+    }
+    
+    if (item !== undefined) {
+        filter.item = item;
+    }
+    console.log("filter", filter);
+    const transactions = await MarketTransaction.find(filter).limit(1000).lean();
+    return res.json(transactions);
+}
     
     // body: {
     //   buyer_name: username,
@@ -153,10 +154,12 @@ exports.sell = async (req, res) => {
             return res.status(200).json({ message: "Item bought sucessfully" });
             
         } catch (error) {
-            await session.abortTransaction();
             console.error('Failed to buy', error);
             return res.status(500).json({ message: "Failed to buy: " + error });
         } finally {
+            if (session.inTransaction()) {
+                await session.abortTransaction();
+            }
             session.endSession();
         }
     };
@@ -183,8 +186,8 @@ exports.sell = async (req, res) => {
             if (transaction.status !== 'Active') {
                 return res.status(404).json({ message: 'Transaction not active' });
             }
-
-            if(!ownsItem(req.body.user.user_id, item_id))
+            
+            if(req.body.user.user_id !== transaction.seller)
                 return res.status(403).send({ message: "You are not the owner of the item" });
             
             transaction.status = 'Cancelled';
@@ -203,10 +206,13 @@ exports.sell = async (req, res) => {
             return res.status(200).json({ message: "Item sell offer cancelled sucessfully" });
             
         } catch (error) {
-            await session.abortTransaction();
             console.error('Failed to cancel', error);
             return res.status(500).send({ message: "Failed to cancel: " + error });
         } finally {
+            if (session.inTransaction()) {
+                await session.abortTransaction();
+            }
             session.endSession();
         }
     };
+    

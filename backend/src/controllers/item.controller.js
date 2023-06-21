@@ -19,13 +19,17 @@ exports.allAccess = async (req, res) => {
 
 exports.createItem = async (req, res) => {
     // console.log(req.body)
+    if (req.body.user.username !== "admin")
+        return res.send(403);
     const itemToSave = new Item(req.body)
     itemToSave.save()
     // console.log(itemToSave.name)
+    
     await User.findOneAndUpdate(
         { username: "admin" },
-        { $push: { items: itemToSave } });
-}    
+        { $push: { items: itemToSave._id } });
+    return res.send(201);
+}        
  
      
 // exports.post = (req, res) => {

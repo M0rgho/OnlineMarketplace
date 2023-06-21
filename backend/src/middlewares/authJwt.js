@@ -1,7 +1,9 @@
 const jwt = require("jsonwebtoken");
 
 verifyToken = (req, res, next) => {
-    const token = req.get("Authorization").replace("Bearer ", "");
+    let token = req.get("Authorization");
+    if (token)
+        token = token.replace("Bearer ", "");
     if (!token || token === '') {
         return res.status(403).send({ message: "No token provided!" });
     }
@@ -11,7 +13,6 @@ verifyToken = (req, res, next) => {
             user_id: decoded.id, 
             username: decoded.username
         };
-        // console.log(req.body.user);
         next();
     });
 };
