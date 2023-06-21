@@ -36,21 +36,27 @@
           <span>Balance:</span>
           <span>{{user.balance ?? "NOT_FOUND"}}</span>
         </div>
+        <div class="info-item">
+          <span>private inventory:</span>
+          <span>{{user.preferences?.private_inventory ?? "not set"}}</span>
+        </div>
       </div>
     <div *ngIf="!user" style="color: rgb(88, 20, 20);"> NO USER INFORMATION FOUND</div>
     <hr>
-    <h2> Inventory</h2>
-    <app-filter-form [option]="option">
-    </app-filter-form>
-    <div *ngFor="let item of user.items">
-        <app-item *ngIf="check(item)" [item]="item" [itemOnSale]="false">
-        </app-item> 
-        <div class="sellButton">
-            <mat-form-field>
-                <mat-label>fill price to sell</mat-label>
-                <input type="number" matInput [(ngModel)]="item.price">
-            </mat-form-field>
-            <button style="width: 50px; height: 48px;" *ngIf="item.price" (click)="sell(item)" mat-raised-button color="primary">sell</button>
-        </div>   
+    <div *ngIf="user">
+      <h2> Inventory</h2>
+      <app-filter-form [option]="option">
+      </app-filter-form>
+      <div *ngFor="let item of user.items">
+          <app-item *ngIf="check(item)" [item]="item" [itemOnSale]="false">
+          </app-item> 
+          <div class="sellButton">
+              <mat-form-field>
+                  <mat-label>fill price to sell</mat-label>
+                  <input type="number" matInput [(ngModel)]="item.price">
+              </mat-form-field>
+              <button style="width: 50px; height: 48px;" *ngIf="item.price" (click)="sell(item)" mat-raised-button color="primary">sell</button>
+          </div>   
+      </div>
     </div>
 </div>

@@ -10,12 +10,11 @@ import { User } from 'src/interfaces/User';
 })
 export class MarketService {
   private marketTransactionSubject = new BehaviorSubject<MarketTransaction[]>([]);
-
+  static readonly url = "http://localhost:3000/market"
 
   constructor(private http: HttpClient) {
-    const url = 'http://localhost:3000/market_offers';
 
-    this.http.get<MarketTransaction[]>(url).subscribe(
+    this.http.get<MarketTransaction[]>(`${MarketService.url}/transactions?status=Active`).subscribe(
       (data: MarketTransaction[]) => {
         this.marketTransactionSubject.next(data);
       },
@@ -26,36 +25,45 @@ export class MarketService {
   }
 
   getActiveTransactions$() {
-    return this.marketTransactionSubject.asObservable();
+    return this.http.get<MarketTransaction[]>(`${MarketService.url}/transactions?status=Active`);
+  }
+
+  getUserTransactions(user_id: string) {
+    return this.http.get<MarketTransaction[]>(`${MarketService.url}/transactions?user=user_id`);
+  }
+
+  getItemTransactions(item_id: string) {
+    return this.http.get<MarketTransaction[]>(`${MarketService.url}/transactions?item=item_id`);
   }
 
 
-  sell(item: Item, user: User){
-    const url = 'http://localhost:3000/sell';
+  sell(item: Item){
     const transaction = {    
-      postedDate: Date,
-      price: item.price,
-      status: 'Active',
-      seller: user,
-      item: item
+      seller_name: localStorage.getItem('user'),
+      item_id: item._id,
+      price: item.price
     }
     console.log(transaction)
 
-    return this.http.post<MarketTransaction[]>(url, transaction);
+    return this.http.post<MarketTransaction[]>(`http://localhost:3000/market/sell`, { 
+      transaction: transaction
+    });
   }
 
   buy(transaction: MarketTransaction, username: string){
-    const url = 'http://localhost:3000/buy';
-    const offer = {
-      username: username,
-      transaction: transaction
+    const body = {
+      buyer_name: username,
+      transaction_id: transaction._id,
     }
-    console.log(offer)
-    return this.http.post<MarketTransaction[]>(url, offer);
+    console.log(body)
+    return this.http.post<MarketTransaction[]>(`${MarketService.url}/buy`, body);
   }
-  cancel(item: MarketTransaction){
-    const url = 'http://localhost:3000/cancel';
 
-    return this.http.post<MarketTransaction[]>(url, item);
+  cancel(transaction: MarketTransaction){
+
+    return this.http.post<MarketTransaction[]>(`${MarketService.url}/cancel`, {
+      transaction_id: transaction._id,
+      seller: transaction.seller
+    });
   }
 }

@@ -12,25 +12,11 @@ export class UserService {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   getUserData(username: string | null) {
-    var token = localStorage.getItem('token')
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + token
-      })
-    };
-    // console.log("user service token " + token)
-    return this.http.get<User>(this.url + username, httpOptions)
+    return this.http.get<User>(`${this.url}${username}?items=1`)
   }
 
   transfer(username: string|null, money: number){
-    var token = localStorage.getItem('token')
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + token
-      })
-    };
-    console.log(money)
-    return this.http.patch(this.url + username, {"balance": money}, httpOptions)
+    return this.http.patch(this.url + username, {"balance": money})
   }
   
 }

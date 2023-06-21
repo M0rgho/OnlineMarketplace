@@ -1,19 +1,17 @@
 const jwt = require("jsonwebtoken");
 
 verifyToken = (req, res, next) => {
-    let bearer = req.get("Authorization");
-    // todo: empty token doesn't work
-    const token = bearer.split('Bearer ')[1].trim();
-    // console.log("token ", token)
-    if (!token) {
+    const token = req.get("Authorization").replace("Bearer ", "");
+    if (!token || token === '') {
         return res.status(403).send({ message: "No token provided!" });
     }
     // console.log(req.params.username)
     jwt.verify(token, "Secret", (err, decoded) => {
-        if (err || decoded.username != req.params.username) {
-            return res.status(401).send({ message: "Unauthorized!" });
-        }
-        req.userId = decoded.id;
+        req.body.user = {
+            user_id: decoded.id, 
+            username: decoded.username
+        };
+        // console.log(req.body.user);
         next();
     });
 };

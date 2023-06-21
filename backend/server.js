@@ -16,6 +16,25 @@ mongoose.connect(URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to MongoDB'))
   .catch((err) => console.error('Failed to connect to MongoDB', err));
 
+// const { MongoClient } = require('mongodb');
+
+// async function killAllSessions() {
+//   const uri = 'mongodb://localhost:27017'; // Replace with your MongoDB connection string
+//   const client = new MongoClient(uri);
+
+//   try {
+//     await client.connect();
+//     const adminDb = client.db('admin');
+//     await adminDb.command({ killAllSessions: [] });
+//     console.log('All sessions and active transactions killed.');
+//   } catch (error) {
+//     console.error('Error killing sessions:', error);
+//   } finally {
+//     await client.close();
+//   }
+// }
+
+// killAllSessions();
 require("./src/routes/items.routes.js")(app)
 require("./src/routes/user.routes.js")(app)
 require("./src/routes/auth.routes.js")(app)

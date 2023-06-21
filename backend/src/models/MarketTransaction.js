@@ -23,11 +23,15 @@ const marketTransactionSchema = new mongoose.Schema({
         required: true,
         index: true
     },
-    sellDate: { type: Date },
+    sellDate: { 
+        type: Date,
+        default: null
+     },
     buyer: {
         type: mongoose.ObjectId,
         ref: 'User',
-        index: true
+        index: true,
+        default: null
     }
 });
 

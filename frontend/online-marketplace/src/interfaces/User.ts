@@ -13,4 +13,8 @@ export interface User{
     balance?: number,
     items?: Item[],
     transactions?: MarketTransaction[],
+    preferences?: {
+        dark_mode: boolean
+        private_inventory: boolean
+    }
 };

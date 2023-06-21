@@ -39,7 +39,13 @@ export class MarketComponent {
   }
 
   cancel(item: MarketTransaction){
-    this.marketService.cancel(item).subscribe()
+    this.marketService.cancel(item).subscribe((res: any) => {
+      window.alert(res.body.meessage ?? "Successfully cancelled item sell offer");
+        
+    }, (error: any) => {
+      console.log(error);
+      this.openErrorDialog(error.error.message);
+    });
   }
 
   openSellItemDialog(sellOffer: MarketTransaction): void {
@@ -51,8 +57,11 @@ export class MarketComponent {
       if (confirm) {
         console.log('User ' + localStorage.getItem("user")! + 'bought form price: ' + sellOffer.price);
         this.marketService.buy(sellOffer, localStorage.getItem("user")!).subscribe((res: any) => {
-          window.alert(res.body.meessage ?? "Successfully bought the item");
-            
+          this.dialog.open(ErrorDialogComponent,  {
+            data: {
+              message: "Successfully bought the item"
+            },
+          },);      
         }, (error: any) => {
           console.log(error);
           this.openErrorDialog(error.error.message);

@@ -1,4 +1,5 @@
 const controller = require("../controllers/market.controller")
+const verifyToken  = require("../middlewares/authJwt");
 
 module.exports = (app) => {
     app.use(function(req, res, next) {
@@ -9,13 +10,11 @@ module.exports = (app) => {
         next();
       });
 
-    // app.post("/sell", [verifyToken], controller.sell)
-    app.post("/sell", controller.sell)
+    app.post("/market/sell", [verifyToken], controller.sell)
 
-    app.post("/buy", controller.buy)
+    app.post("/market/buy", [verifyToken], controller.buy)
     
-    app.post("/cancel", controller.cancel)
+    app.post("/market/cancel", [verifyToken], controller.cancel)
 
-
-    app.get("/market_offers", controller.active_offers)
+    app.get("/market/transactions", controller.transactions)
 }

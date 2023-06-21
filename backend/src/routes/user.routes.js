@@ -1,5 +1,6 @@
 const controller = require("../controllers/user.controller");
 const verifyToken  = require("../middlewares/authJwt");
+
 module.exports = (app) => {
     app.use(function(req, res, next) {
         res.header(

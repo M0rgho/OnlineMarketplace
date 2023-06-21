@@ -7,6 +7,11 @@ import { Item } from 'src/interfaces/Item';
 import { FilterOption } from 'src/interfaces/FilterOption';
 import { Filter } from 'src/app/utils/filter';
 import { MarketService } from 'src/services/market.service';
+import { AuthService } from 'src/services/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MarketTransaction } from 'src/interfaces/MarketTransaction';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-user',
@@ -25,8 +30,11 @@ export class UserComponent {
   constructor(
     private route: ActivatedRoute, 
     private userService: UserService,
+    private authService: AuthService,
     private router: Router, 
-    private marketService: MarketService){}
+    private marketService: MarketService,
+    public dialog: MatDialog
+    ){}
 
   ngOnInit(){
     this.route.paramMap.subscribe((params: ParamMap) => {
@@ -57,8 +65,28 @@ export class UserComponent {
     return imgSrc
   }
 
-  sell(item: Item){
-    var price = 69
-    this.marketService.sell(item,this.user).subscribe()
+  sell(item: Item): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: { text: 'Are you sure you want to sell this item?', loggedIn: this.authService.isUserLoggedIn() }
+    });
+  
+    dialogRef.afterClosed().subscribe((confirm: boolean | number) => {
+      if (confirm) {
+        this.marketService.sell(item).subscribe((res: any) => {
+          this.dialog.open(ErrorDialogComponent,  {
+            data: {
+              message: res?.body?.meessage || "Successfully put item up for sale"
+            },
+          },);              
+        }, (error: any) => {
+          console.log(error);
+          this.dialog.open(ErrorDialogComponent,  {
+            data: {
+              message: error.error.message
+            },
+          },);
+        })
+      }
+    });
   }
 }

@@ -39,13 +39,17 @@ const userSchema = new mongoose.Schema({
         min: 0,
     },
     items: {
-        type: [itemSchema],
+        type: [mongoose.ObjectId],
         ref: 'Item'
     },
     transactions: {
         type: [mongoose.ObjectId],
         ref: 'MarketTransaction',
     },
+    preferences: {
+        dark_mode: { type: Boolean, default: false },
+        private_invenotry: { type: Boolean, default: true }
+    }
 });
 const userModel = mongoose.model('User', userSchema);
 
