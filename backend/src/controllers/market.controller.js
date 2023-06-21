@@ -188,7 +188,7 @@ exports.cancel = async (req, res) => {
             return res.status(404).json({ message: 'Transaction not active' });
         }
         
-        if(req.body.user.user_id !== transaction.seller)
+        if(req.body.user.user_id.toString() !== transaction.seller.toString())
             return res.status(403).send({ message: "You are not the owner of the item" });
         
         transaction.status = 'Cancelled';
