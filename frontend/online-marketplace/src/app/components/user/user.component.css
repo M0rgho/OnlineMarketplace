@@ -15,30 +15,58 @@ app-item, button{
   height: 70px;
 }
   
-.money-div {
+.user_data {
   position: absolute;
   right: 50px;
   top: 150px;
   border: 1px solid gray;
+  background-color: white;
+
   padding: 10px;
   border-radius: 10px;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-  width: 200px;
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+  
+}
+
+.add_money {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
 }
 
 .flex-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 10px;
   justify-content: space-around;
   padding: 10px;
-  border: 1px solid gray;
 }
+
+.info-item {
+  display: flex;
+  
+}
+
+
 .info-item {
   display: flex;
   gap: 10px;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 
-.info-item span {
+.info-item span:first-child {
+  margin-right: 10px;
+}
+
+.info-item span:nth-child(2) {
   font-weight: bold;
+}
+
+.tabs {
+  background-color: white;
+  padding: 20px;
 }

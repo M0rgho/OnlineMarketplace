@@ -1,22 +1,25 @@
 <div style="margin-top: 0px;">
-   <mat-toolbar class="toolbar" [style.background-color]="(token$ | async) !== '' ? 'rgb(195, 195, 195)' : ''">
-      <div class="left-section" >
-        <h2 style="font-weight: bolder">Online Marketplace</h2>
-      </div>
-      <div class="right-section">
-        <a *ngIf="(token$ | async) !== ''" class="toolbar-button" (click)="navUser()">
-          <mat-icon class="mat-icon-lg" [inline]="true">person</mat-icon>
-        </a>
-        <a class="toolbar-button" [routerLink]="['/market']">
-          <mat-icon class="mat-icon-lg" [inline]="true">store</mat-icon>
-        </a>
-        <a *ngIf="(token$ | async) === ''"class="toolbar-button" [routerLink]="['/login']">
-          <mat-icon class="mat-icon-lg" [inline]="true">login</mat-icon>
-        </a>
-        <a *ngIf="(token$ | async) !== ''"class="toolbar-button" (click)="logout()">
-          <mat-icon class="mat-icon-lg" [inline]="true">logout</mat-icon>
-        </a>
-      </div>
-    </mat-toolbar>
-   </div>
+  <mat-toolbar class="toolbar" [style.background-color]="(token$ | async) !== '' ? 'rgb(195, 195, 195)' : ''">
+    <div class="left-section" >
+      <h2 style="font-weight: bolder">Online Marketplace</h2>
+    </div>
+    <div class="right-section">
+      <a *ngIf="(token$ | async) !== ''" class="toolbar-button" (click)="navUser()">
+        <mat-icon class="mat-icon-lg" [inline]="true">person</mat-icon>
+      </a>
+      <a class="toolbar-button" [routerLink]="['/market']">
+        <mat-icon class="mat-icon-lg" [inline]="true">store</mat-icon>
+      </a>
+      <a *ngIf="(token$ | async) === ''"class="toolbar-button" [routerLink]="['/login']">
+        <mat-icon class="mat-icon-lg" [inline]="true">login</mat-icon>
+      </a>
+      <a *ngIf="(token$ | async) !== ''"class="toolbar-button" (click)="logout()">
+        <mat-icon class="mat-icon-lg" [inline]="true">logout</mat-icon>
+      </a>
+    </div>
+  </mat-toolbar>
+</div>
+<div class="main-background-box">
+  <div class="main-background"></div>
+</div>
 <router-outlet></router-outlet>

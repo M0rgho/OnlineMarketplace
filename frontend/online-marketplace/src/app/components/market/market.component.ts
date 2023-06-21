@@ -35,7 +35,7 @@ export class MarketComponent {
     return this.filter.check(item)
   }
   isOwner(transaction: MarketTransaction) {
-    return localStorage.getItem('id') !== transaction.seller
+    return localStorage.getItem('id') === transaction.seller
   }
 
   cancel(item: MarketTransaction){

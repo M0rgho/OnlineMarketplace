@@ -89,4 +89,22 @@ export class UserComponent {
       }
     });
   }
+
+  cancel(item: MarketTransaction){
+    this.marketService.cancel(item).subscribe((res: any) => {
+      window.alert(res.body.meessage ?? "Successfully cancelled item sell offer");
+        
+    }, (error: any) => {
+      console.log(error);
+      this.openErrorDialog(error.error.message);
+    });
+  }
+  
+  openErrorDialog(errorMessage: string): void {
+    this.dialog.open(ErrorDialogComponent,  {
+      data: {
+        message: errorMessage
+      },
+    },);
+  }
 }

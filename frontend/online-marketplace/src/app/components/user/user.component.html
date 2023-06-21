@@ -1,13 +1,7 @@
 <div class="container">
     <!-- <app-logout></app-logout> -->
-    <div class="money-div">
-        <form [formGroup] = "formGroup" action="">
-            <label for="balance">add money</label>
-            <input type="number" formControlName="addControl">
-            <button (click)="addMoney()">add</button>
-        </form>
-    </div>
-    <div *ngIf="user" class="flex-container">
+    <div class="user_data">
+      <div *ngIf="user" class="flex-container">
         <div class="info-item">
           <span>Username:</span>
           <span>{{ user.username }}</span>
@@ -41,22 +35,49 @@
           <span>{{user.preferences?.private_inventory ?? "not set"}}</span>
         </div>
       </div>
-    <div *ngIf="!user" style="color: rgb(88, 20, 20);"> NO USER INFORMATION FOUND</div>
-    <hr>
-    <div *ngIf="user">
-      <h2> Inventory</h2>
-      <app-filter-form [option]="option">
-      </app-filter-form>
-      <div *ngFor="let item of user.items">
-          <app-item *ngIf="check(item)" [item]="item" [itemOnSale]="false">
-          </app-item> 
-          <div class="sellButton">
-              <mat-form-field>
-                  <mat-label>fill price to sell</mat-label>
-                  <input type="number" matInput [(ngModel)]="item.price">
-              </mat-form-field>
-              <button style="width: 50px; height: 48px;" *ngIf="item.price" (click)="sell(item)" mat-raised-button color="primary">sell</button>
-          </div>   
+      <div *ngIf="!user" style="color: rgb(88, 20, 20);"> 
+        NO USER INFORMATION FOUND
       </div>
+        <form [formGroup] = "formGroup" class="add_money" action="">
+            <label for="balance">add money</label>
+            <input type="number" formControlName="addControl" style="display: inline;">
+            <button (click)="addMoney()" >add</button>
+        </form>
     </div>
+    
+    <div *ngIf="user" class="tabs">
+      <mat-tab-group>
+        <mat-tab label="Inventory">
+          <app-filter-form [option]="option">
+          </app-filter-form>
+          <div *ngFor="let item of user.items">
+              <app-item *ngIf="check(item)" [item]="item" [itemOnSale]="false">
+              </app-item> 
+              <div class="sellButton">
+                  <mat-form-field>
+                      <mat-label>fill price to sell</mat-label>
+                      <input type="number" matInput [(ngModel)]="item.price">
+                  </mat-form-field>
+                  <button style="width: 50px; height: 48px;" *ngIf="item.price" (click)="sell(item)" mat-raised-button color="primary">sell</button>
+              </div>   
+         </div>
+        </mat-tab>
+      
+        <mat-tab label="Active Sell Offers">
+          <div *ngIf="user.transactions">
+            <div *ngFor="let transaction of user.transactions">
+              <button (click)="cancel(transaction)" mat-raised-button color="primary">cancel offer</button>
+            </div>
+          </div>
+          <p *ngIf="!user.transactions"> 
+            no active sell offers
+          </p>
+        </mat-tab>
+      
+        <mat-tab label="Transaction History">
+          
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+    
 </div>

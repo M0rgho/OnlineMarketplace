@@ -48,7 +48,7 @@ const userSchema = new mongoose.Schema({
     },
     preferences: {
         dark_mode: { type: Boolean, default: false },
-        private_invenotry: { type: Boolean, default: true }
+        private_inventory: { type: Boolean, default: true }
     }
 });
 const userModel = mongoose.model('User', userSchema);

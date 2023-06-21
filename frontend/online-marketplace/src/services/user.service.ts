@@ -12,7 +12,7 @@ export class UserService {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
   getUserData(username: string | null) {
-    return this.http.get<User>(`${this.url}${username}?items=1`)
+    return this.http.get<User>(`${this.url}${username}?items=1&transactions=1`)
   }
 
   transfer(username: string|null, money: number){

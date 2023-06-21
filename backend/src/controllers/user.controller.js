@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 
 exports.userAccess = async (req, res) => {
     const getItems = req.query.items;
+    const getTransactions = req.query.transactions;
     let isAccountOwner = false;
     const token = req.get("Authorization").replace("Bearer ", "");
     if (!token || token === '') {
@@ -17,22 +18,24 @@ exports.userAccess = async (req, res) => {
 
     try {
         let userData;
-        
-        let projection = {};
-        if (!isAccountOwner)
-            projection = 'username role items'
-        
+        let populate = [];
         
         if (getItems == '1') {
-            userData = await userModel.findOne({ username: req.params.username })
-            .populate('items')
-            .select(projection)
-            .lean()
-        } else {
-            userData = await userModel.findOne({ username: req.params.username })
-            .select(projection)
-            .lean()
+            populate.push('items')
         }
+        
+        if (getTransactions == '1') {
+            populate.push('transactions')
+        }
+        console.log("POP", getItems, getTransactions);
+        let projection = {};
+        if (!isAccountOwner)
+            projection = 'username role items preferences.private_inventory'
+        
+        userData = await userModel.findOne({ username: req.params.username })
+        .populate(populate)
+        .select(projection)
+        .lean()
         
         res.send(userData);
     } catch(error) {

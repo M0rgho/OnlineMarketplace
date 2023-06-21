@@ -33,6 +33,7 @@ import { MarketService } from 'src/services/market.service';
 
 import { TokenInterceptor } from './token-interceptor';
 import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { ErrorDialogComponent } from './components/error-dialog/error-dialog.com
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTabsModule
 
   ],
   providers: [
