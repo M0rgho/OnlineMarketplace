@@ -4,9 +4,9 @@
 
 <div>
     <div *ngFor="let transaction of transactions$ | async">
-        <app-item *ngIf="filter_item(transaction.item)" [item]="transaction.item" [itemOnSale]="true" [price]="transaction.price">
+        <app-item *ngIf="filter_item(transaction)" [item]="transaction.item" [itemOnSale]="true" [price]="transaction.price">
         </app-item>
-        <button mat-raised-button *ngIf="filter_item(transaction.item) && !isOwner(transaction)" color="primary" (click)="openSellItemDialog( transaction)">Buy Item</button>
-        <button *ngIf="filter_item(transaction.item) && isOwner(transaction)" (click)="cancel(transaction)" mat-raised-button color="primary">cancel offer</button>
+        <button mat-raised-button *ngIf="filter_item(transaction) && !isOwner(transaction)" color="primary" (click)="openSellItemDialog( transaction)">Buy Item</button>
+        <button *ngIf="filter_item(transaction) && isOwner(transaction)" (click)="cancel(transaction)" mat-raised-button color="primary">cancel offer</button>
     </div>
 </div>

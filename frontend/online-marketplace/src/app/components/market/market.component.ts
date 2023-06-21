@@ -31,8 +31,9 @@ export class MarketComponent {
     this.transactions$.subscribe(transitions => console.log(transitions));
   }
 
-  filter_item(item: Item){
-    return this.filter.check(item)
+  filter_item(transaction: MarketTransaction){
+    transaction.item.price = transaction.price
+    return this.filter.check(transaction.item)
   }
   isOwner(transaction: MarketTransaction) {
     return localStorage.getItem('id') === transaction.seller

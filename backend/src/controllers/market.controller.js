@@ -114,8 +114,8 @@ exports.buy = async (req, res) => {
         }
         
         const [buyer, seller] = await Promise.all([
-            User.findOne({ username: req.body.buyer_name }, session),
-            User.findOne({ _id: transaction.seller }, session)
+            User.findOne({ username: req.body.buyer_name }).session(session),
+            User.findOne({ _id: transaction.seller }).session(session)
         ]);
         
         if (transaction.status !== 'Active') {
