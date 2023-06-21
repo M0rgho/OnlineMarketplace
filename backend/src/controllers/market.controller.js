@@ -23,7 +23,7 @@ async function ownsItem(user_id, item_id, session) {
 exports.sell = async (req, res) => {
     console.log("SELL");
     const session = await mongoose.startSession();
-    session.startTransaction();
+    await session.startTransaction();
     console.log(req.body);
     try {
         const item_id = req.body.transaction.item_id;
@@ -47,8 +47,7 @@ exports.sell = async (req, res) => {
             req.body.user.user_id, {
                 $pull: { items: item_id },
                 $push: { transactions: savedTransaction._id }
-            }
-            ).session(session);
+            }, session);
             
             
         await session.commitTransaction();
@@ -106,7 +105,7 @@ exports.buy = async (req, res) => {
     console.log("BUY");
     
     const session = await mongoose.startSession();
-    session.startTransaction();
+    await await session.startTransaction();
     
     try {
         const transaction = await MarketTransaction.findOne({ _id: req.body.transaction_id });
@@ -115,8 +114,8 @@ exports.buy = async (req, res) => {
         }
         
         const [buyer, seller] = await Promise.all([
-            User.findOne({ username: req.body.buyer_name }),
-            User.findOne({ _id: transaction.seller })
+            User.findOne({ username: req.body.buyer_name }, session),
+            User.findOne({ _id: transaction.seller }, session)
         ]);
         
         if (transaction.status !== 'Active') {
@@ -132,7 +131,7 @@ exports.buy = async (req, res) => {
             return res.status(404).send({ message: "Buyer cannot afford item." });
         }
         if (buyer._id.equals(transaction.seller)) {
-            return res.status(404).send({ message: "Buyer cannot buy his own item." });
+            return res.status(404).send({ message: "Buyer cannot buy their own item." });
         }
         
         transaction.status = 'Successful';
@@ -173,7 +172,7 @@ exports.cancel = async (req, res) => {
     console.log("CANCEL");
     
     const session = await mongoose.startSession();
-    session.startTransaction();
+    await session.startTransaction();
     
     try {
         const [transaction, seller] = await Promise.all([
