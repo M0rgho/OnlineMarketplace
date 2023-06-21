@@ -63,10 +63,15 @@
          </div>
         </mat-tab>
       
-        <mat-tab label="Active Sell Offers">
+        <mat-tab label="Active Sell Offers" class="tab">
           <div *ngIf="user.transactions">
             <div *ngFor="let transaction of user.transactions">
-              <button (click)="cancel(transaction)" mat-raised-button color="primary">cancel offer</button>
+              <div *ngIf="transaction.status === 'Active'">
+                <app-item [item]="transaction.item" [itemOnSale]="false" [price]="transaction.price">
+                </app-item>
+                <button (click)="cancel(transaction)" mat-raised-button color="primary">cancel offer</button>
+              </div>
+              
             </div>
           </div>
           <p *ngIf="!user.transactions"> 
@@ -74,8 +79,20 @@
           </p>
         </mat-tab>
       
-        <mat-tab label="Transaction History">
-          
+        <mat-tab label="Transaction History" class="tab">
+          <div *ngIf="user.transactions">
+            <div *ngFor="let transaction of user.transactions">
+              <div *ngIf="transaction.status !== 'Active'">
+                <h2> {{ transaction.status }} {{ transaction.status === 'Successful' ? 'Sold for: ' + transaction.price : '' }}
+                </h2>
+                <app-item  [item]="transaction.item" [itemOnSale]="false" [price]="transaction.price">
+                </app-item>
+              </div>
+            </div>
+          </div>
+          <p *ngIf="!user.transactions"> 
+            no transaction in history
+          </p>
         </mat-tab>
       </mat-tab-group>
     </div>
