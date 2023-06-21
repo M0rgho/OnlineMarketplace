@@ -47,7 +47,7 @@ exports.sell = async (req, res) => {
             req.body.user.user_id, {
                 $pull: { items: item_id },
                 $push: { transactions: savedTransaction._id }
-            }, session);
+            }).session(session);
             
             
         await session.commitTransaction();
@@ -105,7 +105,7 @@ exports.buy = async (req, res) => {
     console.log("BUY");
     
     const session = await mongoose.startSession();
-    await await session.startTransaction();
+    await session.startTransaction();
     
     try {
         const transaction = await MarketTransaction.findOne({ _id: req.body.transaction_id });
